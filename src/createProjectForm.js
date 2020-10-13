@@ -1,33 +1,38 @@
-import {createLabelTag, createInputTag, createButton, append} from './buildingBlocks';
+import { createLabelTag, createInputTag, createButton, append } from './buildingBlocks';
 
 function createProjectForm() {
-  append('content', createButton('new-project-button', 'New Project'));
-  let newProjectButton = document.getElementById('new-project-button');
-  
   let formContainer = document.createElement('div');
   append('content', formContainer);
-  let projectForm = document.createElement('form');
-  append('content', projectForm);
-  projectForm.setAttribute('id', 'projectForm');
+  formContainer.setAttribute('id', 'form-container');
   
-  append('projectForm',createLabelTag('name', 'Project Name'));
-  append('projectForm', createInputTag('name', 'text', '', 'Name'));
+  append('form-container', createButton('new-project-button', 'New Project'));
+  
+  let projectForm = document.createElement('form');
+  append('form-container', projectForm);
+  projectForm.setAttribute('id', 'project-form');
+  projectForm.setAttribute('onsubmit', 'return false');
+  
+  append('project-form',createLabelTag('name', 'Project Name'));
+  append('project-form', createInputTag('name', 'text', 'name-input', 'Name'));
   
   let submitButton = document.createElement('button');
   submitButton.setAttribute('type', 'submit');
   submitButton.setAttribute('value', 'Submit');
+  submitButton.setAttribute('id', 'submit-button');
   submitButton.innerHTML = 'Submit';
-  append('projectForm', submitButton);
+  append('project-form', submitButton);
   
+  let newProjectButton = document.getElementById('new-project-button');
   newProjectButton.addEventListener('click', toggleDisplay);
 }
 
 function toggleDisplay() {
-  if (!projectForm.style.display || projectForm.style.display =="none") {
-    projectForm.style.display = "block";
+  let displaySetting = document.getElementById('project-form');
+  if (displaySetting.style.display === "none" || !displaySetting.style.display) {
+    displaySetting.style.display = "block";
   } else {
-    projectForm.style.display = "none";
+    displaySetting.style.display = "none";
   }
 }
 
-export {createProjectForm}
+export { createProjectForm };

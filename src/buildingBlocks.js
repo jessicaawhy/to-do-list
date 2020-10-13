@@ -27,4 +27,4 @@ function append(parentId, child) {
   parent.appendChild(child);
 }
 
-export {createLabelTag, createInputTag, createButton, append};
+export { createLabelTag, createInputTag, createButton, append };

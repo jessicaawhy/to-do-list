@@ -1,4 +1,5 @@
 import { createLabelTag, createInputTag, createButton, append } from './buildingBlocks';
+import { submitNewProject } from './createProject';
 
 function createProjectForm() {
   let formContainer = document.createElement('div');
@@ -22,8 +23,11 @@ function createProjectForm() {
   submitButton.innerHTML = 'Submit';
   append('project-form', submitButton);
   
-  let newProjectButton = document.getElementById('new-project-button');
-  newProjectButton.addEventListener('click', toggleDisplay);
+  const newProject = document.getElementById('new-project-button');
+  newProject.addEventListener('click', toggleDisplay);
+  
+  const submit = document.getElementById('submit-button');
+  submit.addEventListener('click', submitNewProject);
 }
 
 function toggleDisplay() {

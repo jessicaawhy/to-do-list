@@ -1,41 +1,57 @@
 import { Project } from './project';
-import { createLabelTag, createInputTag, createButton, append } from './buildingBlocks';
 
 const projectController = (() => {
   const projectList = {};
 
   function createProjectPage() {
-    const formContainer = document.createElement('div');
-    append('content', formContainer);
-    formContainer.setAttribute('id', 'form-container');
-    
-    append('form-container', createButton('new-project-button', 'New Project'));
-    const newProjectButton = document.getElementById('new-project-button');
-    newProjectButton.addEventListener('click', toggleDisplay);
-    
-    const projectForm = document.createElement('form');
-    append('form-container', projectForm);
-    projectForm.setAttribute('id', 'project-form');
-    projectForm.setAttribute('onsubmit', 'return false');
-    
-    append('project-form',createLabelTag('name', 'Project Name'));
-    append('project-form', createInputTag('name', 'text', 'name-input', 'Name'));
-    
-    const submitButton = document.createElement('button');
-    submitButton.setAttribute('type', 'submit');
-    submitButton.setAttribute('value', 'Submit');
-    submitButton.setAttribute('id', 'submit-button');
-    submitButton.innerHTML = 'Submit';
-    submitButton.addEventListener('click', addProject);
-    append('project-form', submitButton);
+    const content = document.querySelector('#content');
 
-    const element = document.createElement('div');
-    element.setAttribute('id', 'content-container');
-    append('content', element);
+    // Create sidebar element container
+    const sidebar = document.createElement('div');
+    content.appendChild(sidebar);
+    sidebar.setAttribute('id', 'sidebar');
+    // Add header
+    const heading = document.createElement('h1');
+    heading.innerHTML = 'Projects';
+    sidebar.appendChild(heading);
+    // Add project list container
+    const projectListContainer = document.createElement('div');
+    projectListContainer.setAttribute('id', 'projects-list-container');
+    sidebar.appendChild(projectListContainer);
+    // Add new project button for form display
+    const newProjectButton = document.createElement('button');
+    sidebar.appendChild(newProjectButton);
+    newProjectButton.setAttribute('id', 'new-project-button');
+    newProjectButton.innerHTML = 'New Project';
+    newProjectButton.addEventListener('click', toggleDisplay);
+    // Add new project form
+    const addProjectsForm = document.createElement('form');
+    sidebar.appendChild(addProjectsForm); // Maybe append somewhere else later. Make this modal type of form.
+    addProjectsForm.setAttribute('id', 'add-project-form');
+    addProjectsForm.setAttribute('onsubmit', 'return false');
+    // Create label and input
+    const newProjectLabel = document.createElement('label');
+    addProjectsForm.appendChild(newProjectLabel); // Maybe append somewhere else later. Make this modal type of form.
+    newProjectLabel.setAttribute('for', 'name');
+    newProjectLabel.innerHTML = 'Project Name';
+    const newProjectInput = document.createElement('input');
+    addProjectsForm.appendChild(newProjectInput); // Maybe append somewhere else later. Make this modal type of form.
+    newProjectInput.setAttribute('name', 'name');
+    newProjectInput.setAttribute('type', 'text');
+    newProjectInput.setAttribute('id', 'name-input');
+    newProjectInput.setAttribute('placeholder', 'Name');
+    // Add project elements to the page
+    const addProjectButton = document.createElement('button');
+    addProjectsForm.appendChild(addProjectButton); // Maybe append somewhere else later. Make this modal type of form.
+    addProjectButton.setAttribute('type', 'submit');
+    addProjectButton.setAttribute('value', 'Submit');
+    addProjectButton.setAttribute('id', 'add-project');
+    addProjectButton.innerHTML = 'Submit';
+    addProjectButton.addEventListener('click', addProject);
   }
 
   function toggleDisplay(id) {
-    const displaySetting = document.getElementById('project-form'); // swap out for id var
+    const displaySetting = document.getElementById('add-project-form'); // swap out for id var
     if (displaySetting.style.display === "none" || !displaySetting.style.display) {
       displaySetting.style.display = "block";
     } else {
@@ -61,7 +77,9 @@ const projectController = (() => {
       deleteButton.innerHTML = 'Delete Project';
       deleteButton.addEventListener('click', (e) => deleteProject(e));
       projectContainer.appendChild(deleteButton);
-      append('content-container', projectContainer);
+
+      const parentContainer = document.getElementById('projects-list-container');
+      parentContainer.appendChild(projectContainer);
     }
   }
 

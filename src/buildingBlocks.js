@@ -1,12 +1,12 @@
 function createLabelTag(name, labelText) {
-  let label = document.createElement('label');
+  const label = document.createElement('label');
   label.setAttribute('for', name);
   label.innerHTML = labelText;
   return label;
 }
 
 function createInputTag(name, type, id, placeholder) {
-  let input = document.createElement('input');
+  const input = document.createElement('input');
   input.setAttribute('name', name);
   input.setAttribute('type', type);
   input.setAttribute('id', id);
@@ -15,8 +15,8 @@ function createInputTag(name, type, id, placeholder) {
 }
 
 function createButton(buttonId, buttonText) {
-  let button = document.createElement('button');
-  append('content', button)
+  const button = document.createElement('button');
+  append('content', button);
   button.setAttribute('id', buttonId);
   button.innerHTML = buttonText;
   return button;

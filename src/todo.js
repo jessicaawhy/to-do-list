@@ -1,4 +1,4 @@
-class Task {
+class Todo {
   constructor(title, description, dueDate, priority, status) {
     this.title = title;
     this.description = description;
@@ -8,4 +8,4 @@ class Task {
   }
 }
 
-export { Task };
+export { Todo };

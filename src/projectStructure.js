@@ -74,7 +74,7 @@ const sidebarStructure = [{
 const mainStructure = [{ 
   type: 'h1', 
   parent: 'main-header',
-  innerHTML: 'Todos',
+  innerHTML: '',
   attributes: {
   }
 },

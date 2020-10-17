@@ -1,3 +1,29 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#content {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 3fr;
+  height: 100%
+}
+
+#sidebar {
+  background-color: rgb(247, 252, 255);
+}
+
+#sidebar > *, #main > * {
+  padding: 15px;
+}
+
+#main {
+  display: none;
+  grid-column: 2 / 3;
+}
+
 #add-project-form {
   display: none; /* Hidden by default */
 }

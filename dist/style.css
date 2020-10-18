@@ -1,5 +1,10 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 html, body {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
@@ -7,8 +12,8 @@ html, body {
 #content {
   display: grid;
   height: 100%;
-  grid-template-columns: 1fr 3fr;
-  height: 100%
+  width: 100%;
+  grid-template-columns: 1fr 2fr;
 }
 
 #sidebar {
@@ -16,14 +21,56 @@ html, body {
 }
 
 #sidebar > *, #main > * {
-  padding: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 #main {
-  display: none;
   grid-column: 2 / 3;
 }
 
 #add-project-form {
   display: none; /* Hidden by default */
 }
+
+
+/* button {
+  border: none;
+  background: none;
+  font-size: 16px;
+}
+
+button:active {
+  border: none;
+}
+
+#add-project-button {
+  width: 100%;
+  padding: 20px;
+  text-align: left;
+}
+
+.wrapper-btns {
+  display: flex;
+}
+
+.wrapper-btns .sidebar-name-btn, .wrapper-btns .delete-name-btn {
+  padding: 20px;
+}
+
+.wrapper-btns .delete-name-btn {
+  width: 30%;
+}
+
+.wrapper-btns .sidebar-name-btn {
+  width: 100%;
+  text-align: left;
+}
+
+
+.wrapper-btns:hover {
+  background-color: white;
+}
+
+.wrapper-btns .delete-name-btn:hover {
+} */

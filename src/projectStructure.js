@@ -25,7 +25,25 @@ const pageStructure = [{
   attributes: {
     id: 'sidebar-footer'
   }
+}];
+
+const sidebarStructure = [{ 
+  type: 'h1', 
+  parent: 'sidebar-header',
+  innerHTML: 'Projects',
+  attributes: {
+  }
 },
+{ 
+  type: 'button', 
+  parent: 'sidebar-footer',
+  innerHTML: 'Add Project',
+  attributes: {
+    id: 'add-project-button'
+  }
+}];
+
+const mainStructure = [
 { 
   type: 'div',
   parent: 'content',
@@ -53,25 +71,8 @@ const pageStructure = [{
   attributes: {
     id: 'main-footer'
   }
-}];
-
-const sidebarStructure = [{ 
-  type: 'h1', 
-  parent: 'sidebar-header',
-  innerHTML: 'Projects',
-  attributes: {
-  }
 },
 { 
-  type: 'button', 
-  parent: 'sidebar-footer',
-  innerHTML: 'Add Project',
-  attributes: {
-    id: 'add-project-button'
-  }
-}];
-
-const mainStructure = [{ 
   type: 'h1', 
   parent: 'main-header',
   innerHTML: '',

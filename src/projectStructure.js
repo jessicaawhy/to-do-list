@@ -88,7 +88,7 @@ const mainStructure = [
   }
 }];
 
-const forms = [{ 
+const projectForm = [{ 
   type: 'form', 
   parent: 'sidebar-footer',
   innerHTML: '',
@@ -128,4 +128,44 @@ const forms = [{
   }
 }];
 
-export { pageStructure, sidebarStructure, mainStructure, forms };
+const todoForm = [{ 
+  type: 'form', 
+  parent: 'main-footer',
+  innerHTML: '',
+  attributes: {
+    'id': 'add-todo-form',
+    'onsubmit': 'return false'
+  }
+},
+{
+  type: 'label', 
+  parent: 'add-todo-form',
+  innerHTML: 'Todo Name',
+  attributes: {
+    'for': 'title',
+  }
+},
+{
+  type: 'input', 
+  parent: 'add-todo-form',
+  innerHTML: '',
+  attributes: {
+    'name': 'title',
+    'type': 'text',
+    'id': 'todo-name-input',
+    'placeholder': 'title'
+  }
+},
+{
+  type: 'button', 
+  parent: 'add-todo-form',
+  innerHTML: 'Submit',
+  attributes: {
+    'type': 'submit',
+    'value': 'Submit',
+    'id': 'submit-todo-button',
+    'placeholder': 'Name'
+  }
+}];
+
+export { pageStructure, sidebarStructure, mainStructure, projectForm, todoForm };

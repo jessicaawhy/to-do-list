@@ -1,5 +1,6 @@
 import { Project } from './project';
-import { pageStructure, sidebarStructure, mainStructure, forms } from './projectStructure';
+import { Todo } from './todo'
+import { pageStructure, sidebarStructure, mainStructure, projectForm, todoForm } from './projectStructure';
 
 const projectView = (() => {
   const projectList = {
@@ -107,6 +108,11 @@ const projectView = (() => {
         const deleteButton = document.getElementById(`task${i}`).lastChild; 
         deleteButton.addEventListener('click', (e) => deleteTodo(e));
       }
+      create(todoForm);
+      const addTodoButton = document.getElementById('add-todo-button');
+      addTodoButton.addEventListener('click', ()=> toggleDisplay('todo'));
+      const submitTodoButton = document.getElementById('submit-todo-button');
+      submitTodoButton.addEventListener('click', addTodo);
     }
 
   function addProject() {
@@ -154,18 +160,25 @@ const projectView = (() => {
     target.remove();
   }
   
+  function addTodo() {
+    // add something to handle projects that already exist
+    const projectName = document.getElementById('main-header').innerHTML;
+    const todoTitle = document.getElementById("todo-name-input").value;
+
+    let newTodo = new Todo(todoTitle);
+    projectList[projectName]['tasks'].push(newTodo);
+
+    document.getElementById("todo-name-input").value = '';
+    renderTodos();
+  }
 
   function deleteTodo(e) {
-    const todoIndex = e.target.closest('div').id.substring(4)
+    const todoIndex = e.target.closest('div').id.substring(4);
     const projectName = document.getElementById('main-header').innerHTML;
 
-    projectList[projectName].tasks.splice(todoIndex, 1)
+    projectList[projectName].tasks.splice(todoIndex, 1);
 
-    renderTodos()
-
-
-
-
+    renderTodos();
   }
 
   function deleteMainStructure() {
@@ -177,8 +190,8 @@ const projectView = (() => {
     }
   }
 
-  function toggleDisplay() {
-    const displaySetting = document.getElementById('add-project-form'); // swap out for id var
+  function toggleDisplay(type) {
+    const displaySetting = document.getElementById(`add-${type}-form`); // swap out for id var
     if (displaySetting.style.display === "none" || !displaySetting.style.display) {
       displaySetting.style.display = "block";
     } else {
@@ -186,10 +199,10 @@ const projectView = (() => {
     }
   }
   
-  create(pageStructure, sidebarStructure, forms);
+  create(pageStructure, sidebarStructure, projectForm);
   renderSidebar();
   const addProjectButton = document.getElementById('add-project-button');
-  addProjectButton.addEventListener('click', ()=> toggleDisplay());
+  addProjectButton.addEventListener('click', ()=> toggleDisplay('project'));
   const submitProjectButton = document.getElementById('submit-project-button');
   submitProjectButton.addEventListener('click', addProject);
   })()

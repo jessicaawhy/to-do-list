@@ -70,9 +70,9 @@ const projectView = (() => {
   }
   
   function renderTodos(e) {
+    const name = e ? e.target.parentNode.id : document.getElementById('main-header').innerHTML;
     deleteMainStructure();
     create(mainStructure);
-    const name = e.target.parentNode.id;
     const mainHeader = document.getElementById('main-header');
     mainHeader.innerHTML = name;
     
@@ -104,81 +104,93 @@ const projectView = (() => {
           classList: ['main-name-btn']
         }];
         create(taskContainer);
+        const deleteButton = document.getElementById(`task${i}`).lastChild; 
+        deleteButton.addEventListener('click', (e) => deleteTodo(e));
       }
     }
 
-    function addProject() {
-      // add something to handle projects that already exist
-      const name = document.getElementById("project-name-input").value;
-      if (projectList[name]) {
-        console.log('Please choose another name'); // change this to a box alert later
-      } else {
-        const project = new Project(name);
-        projectList[name] = project;
-        document.getElementById("project-name-input").value = '';
-        let container = [{ 
-          type: 'div',
-          parent: 'sidebar-container',
-          attributes: {
-            id: name
-          },
-          classList: ["wrapper-btns"]
+  function addProject() {
+    // add something to handle projects that already exist
+    const name = document.getElementById("project-name-input").value;
+    if (projectList[name]) {
+      console.log('Please choose another name'); // change this to a box alert later
+    } else {
+      const project = new Project(name);
+      projectList[name] = project;
+      document.getElementById("project-name-input").value = '';
+      let container = [{ 
+        type: 'div',
+        parent: 'sidebar-container',
+        attributes: {
+          id: name
         },
-        { 
-          type: 'button',
-          parent: name,
-          innerHTML: name,
-          attributes: {
-          },
-          classList: ['sidebar-name-btn']
+        classList: ["wrapper-btns"]
+      },
+      { 
+        type: 'button',
+        parent: name,
+        innerHTML: name,
+        attributes: {
         },
-        { 
-          type: 'button',
-          parent: name,
-          innerHTML: 'Delete',
-          attributes: {
-          },
-          classList: ['delete-name-btn']
-        }];
-        create(container);
-      }
-      const nameButton = document.getElementById(`${name}`).firstChild;
-      nameButton.addEventListener('click', (e)=>renderTodos(e));
-      const deleteButton = document.getElementById(`${name}`).lastChild;
-      deleteButton.addEventListener('click', (e) => deleteProject(e));
+        classList: ['sidebar-name-btn']
+      },
+      { 
+        type: 'button',
+        parent: name,
+        innerHTML: 'Delete',
+        attributes: {
+        },
+        classList: ['delete-name-btn']
+      }];
+      create(container);
     }
-    
-    function deleteProject(e) {
-      deleteMainStructure();
-      const name = e.target.closest('div').firstChild.innerHTML;
-      delete projectList[name];
-      const target = e.target.closest('div');
-      target.remove();
-    }
-    
-    function deleteMainStructure() {
-      const main = document.getElementById('main');
-      if (main) {
-        while (main.firstChild) {
-          main.removeChild(main.lastChild);
-        }
-      }
-    }
+  }
+  
+  function deleteProject(e) {
+    deleteMainStructure();
+    const name = e.target.closest('div').firstChild.innerHTML;
+    delete projectList[name];
+    const target = e.target.closest('div');
+    target.remove();
+  }
+  
 
-    function toggleDisplay() {
-      const displaySetting = document.getElementById('add-project-form'); // swap out for id var
-      if (displaySetting.style.display === "none" || !displaySetting.style.display) {
-        displaySetting.style.display = "block";
-      } else {
-        displaySetting.style.display = "none";
+  function deleteTodo(e) {
+    const todoIndex = e.target.closest('div').id.substring(4)
+    const projectName = document.getElementById('main-header').innerHTML;
+
+    projectList[projectName].tasks.splice(todoIndex, 1)
+
+    renderTodos()
+
+
+
+
+  }
+
+  function deleteMainStructure() {
+    const main = document.getElementById('main');
+    if (main) {
+      while (main.firstChild) {
+        main.removeChild(main.lastChild);
       }
     }
-    
-    create(pageStructure, sidebarStructure, forms);
-    renderSidebar();
-    const addProjectButton = document.getElementById('add-project-button');
-    addProjectButton.addEventListener('click', ()=> toggleDisplay());
-    const submitProjectButton = document.getElementById('submit-project-button');
-    submitProjectButton.addEventListener('click', addProject);
+  }
+
+  function toggleDisplay() {
+    const displaySetting = document.getElementById('add-project-form'); // swap out for id var
+    if (displaySetting.style.display === "none" || !displaySetting.style.display) {
+      displaySetting.style.display = "block";
+    } else {
+      displaySetting.style.display = "none";
+    }
+  }
+  
+  create(pageStructure, sidebarStructure, forms);
+  renderSidebar();
+  const addProjectButton = document.getElementById('add-project-button');
+  addProjectButton.addEventListener('click', ()=> toggleDisplay());
+  const submitProjectButton = document.getElementById('submit-project-button');
+  submitProjectButton.addEventListener('click', addProject);
   })()
   

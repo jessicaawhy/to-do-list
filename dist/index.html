@@ -1,11 +1,44 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-    <div id="content"></div>
+    <div id="content">
+
+      <div id="sidebar">
+        <div id="view">
+          <h2 id="home">Home</h2>
+          <h2 id="today">Today</h2>
+          <h2 id="week">Week</h2>
+        </div>
+        <div>
+          <h2>Projects</h2>
+          <ul id="sidebar-container">
+            <!-- Contains project names -->
+            <li>Coding</li>
+            <li>Chores</li>
+            <li class="add-button">Add Project</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="main">
+        <div>
+          <h2>Coding</h2>
+        </div>
+        <ul id="main-container">
+          <!-- Contains todo tasks -->
+          <li>Read articles</li>
+          <li>Do challenge problems</li>
+          <li>Daily commit</li>       
+          <li class="add-button">Add Task</li>
+        </ul>
+      </div>
+
+    </div>
     <script src="main.js"></script>
   </body>
 </html>

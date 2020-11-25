@@ -4,4 +4,3 @@ import { addModalListeners } from './modal';
 // createSidebar();
 // createMain();
 addModalListeners();
-

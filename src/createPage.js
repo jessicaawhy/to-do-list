@@ -21,6 +21,16 @@ function create(elementObject) {
 }
 
 function createSidebar() {
+  const sidebarArea = create({
+    type: 'div', 
+    innerHTML: '',
+    attributes: {
+      id: 'sidebar-area'
+    },
+    classList: [],
+    parentID: 'content',
+  });
+
   const sidebar = create({
     type: 'div', 
     innerHTML: '',
@@ -28,7 +38,7 @@ function createSidebar() {
       id: 'sidebar'
     },
     classList: [],
-    parentID: 'content',
+    parentID: 'sidebar-area',
   });
 
   const viewContainer = create({
@@ -71,6 +81,16 @@ function createSidebar() {
     parentID: 'view',
   });
 
+  const sidebarContainer = create({
+    type: 'div', 
+    innerHTML: '',
+    attributes: {
+      id: 'sidebar-container'
+    },
+    classList: [],
+    parentID: 'sidebar',
+  });
+
   const projectsHeading = create({
     type: 'h2', 
     innerHTML: 'Projects',
@@ -78,17 +98,17 @@ function createSidebar() {
       id: ''
     },
     classList: [],
-    parentID: 'sidebar',
+    parentID: 'sidebar-container',
   });
 
-  const sidebarContainer = create({
+  const projectsList = create({
     type: 'ul', 
     innerHTML: '',
     attributes: {
-      id: 'sidebar-container'
+      id: 'projects-list'
     },
     classList: [],
-    parentID: 'sidebar',
+    parentID: 'sidebar-container',
   });
 
   // Fake items for skeleton
@@ -99,7 +119,7 @@ function createSidebar() {
       id: ''
     },
     classList: [],
-    parentID: 'sidebar-container',
+    parentID: 'projects-list',
   });
 
   const listItem2 = create({
@@ -109,14 +129,14 @@ function createSidebar() {
       id: ''
     },
     classList: [],
-    parentID: 'sidebar-container',
+    parentID: 'projects-list',
   });
 
   const addButton = create({
-    type: 'li', 
-    innerHTML: 'Add Project',
+    type: 'p', 
+    innerHTML: '+ Add Project',
     attributes: {
-      id: ''
+      id: 'add-project-button'
     },
     classList: ['add-button'],
     parentID: 'sidebar-container',
@@ -124,6 +144,16 @@ function createSidebar() {
 };
 
 function createMain() {
+  const mainArea = create({
+    type: 'div', 
+    innerHTML: '',
+    attributes: {
+      id: 'main-area'
+    },
+    classList: [],
+    parentID: 'content',
+  });
+
   const main = create({
     type: 'div', 
     innerHTML: '',
@@ -131,27 +161,37 @@ function createMain() {
       id: 'main'
     },
     classList: [],
-    parentID: 'content',
-  });
-
-  const homeView = create({
-    type: 'h2', 
-    innerHTML: 'Coding',
-    attributes: {
-      id: ''
-    },
-    classList: [],
-    parentID: 'main',
+    parentID: 'main-area',
   });
 
   const mainContainer = create({
-    type: 'ul', 
+    type: 'div', 
     innerHTML: '',
     attributes: {
       id: 'main-container'
     },
     classList: [],
     parentID: 'main',
+  });
+
+  const heading = create({
+    type: 'h2', 
+    innerHTML: 'Coding',
+    attributes: {
+      id: 'current-project'
+    },
+    classList: [],
+    parentID: 'main-container',
+  });
+
+  const listContainer = create({
+    type: 'ul', 
+    innerHTML: '',
+    attributes: {
+      id: 'todo-list'
+    },
+    classList: [],
+    parentID: 'main-container',
   });
 
   // Fake items for skeleton
@@ -162,7 +202,7 @@ function createMain() {
       id: ''
     },
     classList: [],
-    parentID: 'main-container',
+    parentID: 'todo-list',
   });
 
   const listItem2 = create({
@@ -172,7 +212,7 @@ function createMain() {
       id: ''
     },
     classList: [],
-    parentID: 'main-container',
+    parentID: 'todo-list',
   });
 
   const listItem3 = create({
@@ -182,14 +222,14 @@ function createMain() {
       id: ''
     },
     classList: [],
-    parentID: 'main-container',
+    parentID: 'todo-list',
   });
 
   const addButton = create({
-    type: 'li', 
-    innerHTML: 'Add Todo',
+    type: 'p', 
+    innerHTML: '+ Add Task',
     attributes: {
-      id: ''
+      id: 'add-todo-button'
     },
     classList: ['add-button'],
     parentID: 'main-container',

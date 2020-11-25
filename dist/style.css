@@ -8,7 +8,7 @@
   height: 100vh;
   width: 100%;
   display: grid;
-  grid-template: 1fr 6fr 1fr / 300px 1fr;
+  grid-template: 1fr 6fr 1fr / 1fr 3fr 1fr;
 }
 
 h2 {
@@ -36,12 +36,8 @@ li {
   color: red;
 }
 
-#view {
-  border-bottom: 1px dashed grey;
-}
-
 #sidebar-container > ul > li {
-  margin: 10px;
+  margin: 10px 25px;
 }
 
 /* Main */
@@ -60,14 +56,16 @@ li {
 
 #main-container > ul > li {
   padding: 10px 25px;
+  border-bottom: 1px dashed grey;
 }
 
-#main-container > ul > li:not(:last-child) {
-  border-bottom: 1px dashed grey;
+p {
+  margin-top: 10px;
 }
 
 .add-button {
   color: grey;
+  font-size: 25px;
 }
 
 .add-button:hover {

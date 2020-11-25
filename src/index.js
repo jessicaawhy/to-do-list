@@ -1,4 +1,4 @@
-// import { createMain, createSidebar } from './createPage';
+import { createMain, createSidebar } from './createPage';
 
-// createSidebar();
-// createMain();
+createSidebar();
+createMain();

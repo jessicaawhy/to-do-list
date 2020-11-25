@@ -2,27 +2,29 @@
 <html>
   <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Text:wght@900&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Text:wght@400;900&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
     <div id="content">
-      <!-- <div id="sidebar-area">
+      <div id="sidebar-area">
         <div id="sidebar">
 
           <div id="view">
-            <h2 id="home">Home</h2>
-            <h2 id="today">Today</h2>
-            <h2 id="week">Week</h2>
+            <h2 id="home">home</h2>
+            <h2 id="today">today</h2>
+            <h2 id="week">week</h2>
           </div>
 
           <div id="sidebar-container">
-            <h2>Projects</h2>
+            <div id="sidebar-header">
+              <h2 id="projects-header">projects</h2>
+              <span id="add-project-button">+</span>
+            </div>
             <ul id="projects-list">
               <li>Coding</li>
               <li>Chores</li>
             </ul>
-            <p id="add-project-button" class="add-button">+ Add Project</p>
           </div>
 
         </div>
@@ -38,11 +40,36 @@
               <li>Do challenge problems</li>
               <li>Daily commit</li>
             </ul>
-            <p id="add-todo-button" class="add-button">+ Add Task</p>
+            <p id="add-todo-button">+ Add Task</p>
           </div>
 
         </div>
-      </div> -->
+      </div>
+
+      <div id="project-modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <label for="project-name">Project Name</label>
+          <input id="project-name" type="text" required>
+          <button type="submit">Submit</button>
+          <button class="cancel">Cancel</button>
+        </div>
+      
+      </div>
+
+      <div id="todo-modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <label for="todo-name">Task Name</label>
+          <input id="todo-name" type="text" required>
+          <button type="submit">Submit</button>
+          <button class="cancel">Cancel</button>
+        </div>
+      
+      </div>
+
     </div>
     <script src="main.js"></script>
   </body>

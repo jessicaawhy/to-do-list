@@ -236,4 +236,4 @@ function createMain() {
   });
 };
 
-export { createMain, createSidebar };
+export { createMain, createSidebar, create };

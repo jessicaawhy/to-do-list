@@ -2,7 +2,7 @@ function modalHandler(e) {
   const type = e.target.id.split('-')[1];
   
   const modal = document.getElementById(`${type}-modal`);
-  modal.style.display = "block";
+  modal.style.display = "flex";
   
   const span = modal.querySelector('.cancel');
   span.onclick = function() {
@@ -13,6 +13,7 @@ function modalHandler(e) {
     if (event.target.id === `${type}-modal`) {
       modal.style.display = "none";
     }
+    document.getElementById(`${type}-name`).value = '';
   }
 }
 

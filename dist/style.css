@@ -43,7 +43,7 @@ li {
   color: var(--accent-color);
 }
 
-#sidebar-header {
+#sidebar-header-area {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -58,7 +58,7 @@ li {
   margin-left: 15px;
 }
 
-#projects-list > li {
+#project-list > li {
   font-family: 'Big Shoulders Inline Text', cursive;
   font-weight: 400;
   margin: 10px 0px;
@@ -76,7 +76,7 @@ li {
   margin: 100px 50px 25px 50px;
 }
 
-#current-project {
+#main-project-header {
   margin: 10px 0 5px 0;
 }
 

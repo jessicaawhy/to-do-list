@@ -30,11 +30,11 @@ function render(projectObj) {
         id: ''
       },
       classList: [],
-      parentID: 'projects-list',
+      parentID: 'project-list',
     })
   }
   
-  let header = document.getElementById('current-project')
+  let header = document.getElementById('main-project-header')
   header.innerHTML = current;
   let container = document.getElementById('main-container');
   container.style.display = 'block';
@@ -53,7 +53,7 @@ function render(projectObj) {
 }
 
 function deleteElements() {
-  let projects = document.getElementById('projects-list');
+  let projects = document.getElementById('project-list');
   while (projects.firstChild) {
     projects.removeChild(projects.lastChild)
   }
@@ -62,7 +62,7 @@ function deleteElements() {
   while (todos.firstChild) {
     todos.removeChild(todos.lastChild)
   }
-  let header = document.getElementById('current-project')
+  let header = document.getElementById('main-project-header')
   header.innerHTML = '';
   let container = document.getElementById('main-container');
   container.style.display = 'none';

@@ -58,12 +58,25 @@ li {
   margin-left: 15px;
 }
 
-#project-list > li {
+#project-list > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  color: var(--accent-color);
+  margin: 10px 0px;
+}
+
+#project-list > div > li {
   font-family: 'Big Shoulders Inline Text', cursive;
   font-weight: 400;
-  margin: 10px 0px;
-  text-align: right;
-  color: var(--accent-color);
+  padding-right: 10px;
+  
+}
+
+#project-list > div > span {
+  color: var(--button-color);
+  font-size: larger;
 }
 
 /* Main */
@@ -80,9 +93,24 @@ li {
   margin: 10px 0 5px 0;
 }
 
-#todo-list > li {
+
+#todo-list > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px 25px;
   border-bottom: 1px dashed var(--accent-color);
+}
+
+/* #todo-list > div > li {
+  padding: 10px 25px;
+  border-bottom: 1px dashed var(--accent-color);
+} */
+
+#todo-list > div > span {
+  color: var(--button-color);
+  font-size: larger;
 }
 
 #add-todo-button {

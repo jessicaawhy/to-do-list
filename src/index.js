@@ -20,9 +20,18 @@ const projectObj = {
 
 let current = Object.keys(projectObj)[0]
 
-
-function render(projectObj) {
+function render(obj) {
   for (let key in projectObj) {
+    let container = create({
+      type: 'div', 
+      innerHTML: '',
+      attributes: {
+        id: ''
+      },
+      classList: [],
+      parentID: 'project-list',
+    })
+    
     let project = create({
       type: 'li', 
       innerHTML: `${key}`,
@@ -30,8 +39,20 @@ function render(projectObj) {
         id: ''
       },
       classList: [],
-      parentID: 'project-list',
+      parentElement: container,
     })
+    
+    let deleteButton = create({
+      type: 'span', 
+      innerHTML: 'x',
+      attributes: {
+        id: ''
+      },
+      classList: [],
+      parentElement: container,
+    })
+
+    project.addEventListener('click', (e) => switchProjectView(e))
   }
   
   let header = document.getElementById('main-project-header')
@@ -40,14 +61,34 @@ function render(projectObj) {
   container.style.display = 'block';
 
   for (let i = 0; i < projectObj[current].length; i++) {
-    create({
+    let container = create({
+      type: 'div', 
+      innerHTML: '',
+      attributes: {
+        id: ''
+      },
+      classList: [],
+      parentID: 'todo-list',
+    })
+    
+    let todo = create({
       type: 'li', 
       innerHTML: `${projectObj[current][i]}`,
       attributes: {
         id: ''
       },
       classList: [],
-      parentID: 'todo-list',
+      parentElement: container,
+    })
+    
+    let deleteButton = create({
+      type: 'span', 
+      innerHTML: 'x',
+      attributes: {
+        id: ''
+      },
+      classList: [],
+      parentElement: container,
     })
   }
 }
@@ -93,6 +134,11 @@ function addNewTodo() {
   modal.style.display = "none";
 }
 
+function switchProjectView(e) {
+  current = e.target.innerHTML;
+  deleteElements();
+  render(projectObj)
+}
 
 let submitButton = document.getElementById('submit-project');
 submitButton.onclick = addNewProject;
@@ -100,3 +146,4 @@ let todoButton = document.getElementById('submit-todo');
 todoButton.onclick = addNewTodo;
 
 render(projectObj)
+

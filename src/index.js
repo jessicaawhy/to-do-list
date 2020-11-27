@@ -94,7 +94,9 @@ function render(obj) {
         classList: [],
         parentElement: container,
       })
+      deleteButton.addEventListener('click', (e) => deleteTodo(e));
     }
+
   } else {
     let header = document.getElementById('main-project-header');
     header.innerHTML = "Add a new project!";
@@ -102,7 +104,6 @@ function render(obj) {
     container.style.display = 'block';
     let taskButton = document.getElementById('add-todo-button');
     taskButton.style.display = 'none';
-
   }
 }
 
@@ -162,6 +163,16 @@ function deleteProject(e) {
   if (current === target) {
     current = Object.keys(projectObj)[0];
   }
+  render(projectObj);
+}
+
+function deleteTodo(e) {
+  let target = e.target.parentElement.firstChild.innerHTML;
+
+  let index = projectObj[current].indexOf(target);
+
+  projectObj[current].splice(index, 1);
+  deleteElements();
   render(projectObj);
 }
 

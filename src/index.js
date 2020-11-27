@@ -18,7 +18,7 @@ const projectObj = {
   ]
 }
 
-let current = Object.keys(projectObj)[0]
+let current = Object.keys(projectObj)[0];
 
 function render(obj) {
   for (let key in projectObj) {
@@ -52,10 +52,11 @@ function render(obj) {
       parentElement: container,
     })
 
-    project.addEventListener('click', (e) => switchProjectView(e))
+    project.addEventListener('click', (e) => switchProjectView(e));
+    deleteButton.addEventListener('click', (e) => deleteProject(e));
   }
   
-  let header = document.getElementById('main-project-header')
+  let header = document.getElementById('main-project-header');
   header.innerHTML = current;
   let container = document.getElementById('main-container');
   container.style.display = 'block';
@@ -96,14 +97,14 @@ function render(obj) {
 function deleteElements() {
   let projects = document.getElementById('project-list');
   while (projects.firstChild) {
-    projects.removeChild(projects.lastChild)
+    projects.removeChild(projects.lastChild);
   }
 
   let todos = document.getElementById('todo-list');
   while (todos.firstChild) {
-    todos.removeChild(todos.lastChild)
+    todos.removeChild(todos.lastChild);
   }
-  let header = document.getElementById('main-project-header')
+  let header = document.getElementById('main-project-header');
   header.innerHTML = '';
   let container = document.getElementById('main-container');
   container.style.display = 'none';
@@ -116,7 +117,7 @@ function addNewProject() {
   current = project;
 
   deleteElements();
-  render(projectObj)
+  render(projectObj);
   
   const modal = document.getElementById('project-modal');
   modal.style.display = "none";
@@ -128,7 +129,7 @@ function addNewTodo() {
   projectObj[current].push(todo)
 
   deleteElements();
-  render(projectObj)
+  render(projectObj);
 
   const modal = document.getElementById('todo-modal');
   modal.style.display = "none";
@@ -137,7 +138,19 @@ function addNewTodo() {
 function switchProjectView(e) {
   current = e.target.innerHTML;
   deleteElements();
-  render(projectObj)
+  render(projectObj);
+}
+
+function deleteProject(e) {
+  let target = e.target.parentElement.firstChild.innerHTML;
+
+  delete projectObj[target];
+  deleteElements();
+  
+  if (current === target) {
+    current = Object.keys(projectObj)[0];
+  }
+  render(projectObj);
 }
 
 let submitButton = document.getElementById('submit-project');
@@ -145,5 +158,5 @@ submitButton.onclick = addNewProject;
 let todoButton = document.getElementById('submit-todo');
 todoButton.onclick = addNewTodo;
 
-render(projectObj)
+render(projectObj);
 

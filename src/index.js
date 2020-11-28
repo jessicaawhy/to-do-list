@@ -4,6 +4,20 @@ import { addModalListeners } from './modal';
 // createSidebar();
 // createMain();
 addModalListeners();
+addSubmitListeners();
+
+function addSubmitListeners() {
+  let submitButton = document.getElementById('submit-project');
+  submitButton.addEventListener('click', (e) => {
+    addNewItem(e);
+    render();
+  });
+  let todoButton = document.getElementById('submit-todo');
+  todoButton.addEventListener('click', (e) => {
+    addNewItem(e);
+    render();
+  });
+}
 
 const projectObj = {
   Coding: [
@@ -20,10 +34,14 @@ const projectObj = {
 
 let current = Object.keys(projectObj)[0];
 
-function render(obj) {
+render();
+
+
+function render() {
   deleteElements();
   renderSidebar();
   renderMain();
+  addListeners();
 }
 
 function deleteElements() {
@@ -43,7 +61,7 @@ function deleteElements() {
   container.style.display = 'none';
 }
 
-function renderSidebar(){
+function renderSidebar() {
   for (let key in projectObj) {
     let container = create({
       type: 'div', 
@@ -61,7 +79,7 @@ function renderSidebar(){
       attributes: {
         id: ''
       },
-      classList: [],
+      classList: ['project'],
       parentElement: container,
     })
     
@@ -71,16 +89,13 @@ function renderSidebar(){
       attributes: {
         id: ''
       },
-      classList: [],
+      classList: ['delete-project'],
       parentElement: container,
     })
-
-    project.addEventListener('click', (e) => switchProjectView(e));
-    deleteButton.addEventListener('click', (e) => deleteItem(e));
   }
 }
 
-function renderMain(){
+function renderMain() {
   if (current) {
     let header = document.getElementById('main-project-header');
     header.innerHTML = current;
@@ -88,7 +103,7 @@ function renderMain(){
     container.style.display = 'block';
     let taskButton = document.getElementById('add-todo-button');
     taskButton.style.display = 'block';
-
+    
     for (let i = 0; i < projectObj[current].length; i++) {
       let container = create({
         type: 'div', 
@@ -116,12 +131,11 @@ function renderMain(){
         attributes: {
           id: ''
         },
-        classList: [],
+        classList: ['delete-todo'],
         parentElement: container,
       })
-
-      deleteButton.addEventListener('click', (e) => deleteItem(e));
     }
+    
   } else {
     let header = document.getElementById('main-project-header');
     header.innerHTML = "Add a new project!";
@@ -132,10 +146,27 @@ function renderMain(){
   }
 }
 
+function addListeners() {
+  const projects = document.querySelectorAll('.project');
+  const deleteProjects = document.querySelectorAll('.delete-project');
+  const deleteTodos = document.querySelectorAll('.delete-todo');
+
+  projects.forEach(project => project.addEventListener('click', (e) => {
+    switchProjectView(e);
+    render();
+  }))
+  deleteProjects.forEach(project => project.addEventListener('click', (e) => {
+    deleteItem(e);
+    render();
+  }))
+  deleteTodos.forEach(todo => todo.addEventListener('click', (e) => {
+    deleteItem(e);
+    render();
+  }))
+}
+
 function switchProjectView(e) {
   current = e.target.innerHTML;
-  
-  render(projectObj);
 }
 
 function addNewItem(e) {
@@ -153,8 +184,6 @@ function addNewItem(e) {
 
   const modal = document.getElementById('todo-modal');
   modal.style.display = "none";
-
-  render(projectObj);
 }
 
 function deleteItem(e) {
@@ -173,14 +202,4 @@ function deleteItem(e) {
       current = Object.keys(projectObj)[0];
     }
   }
-
-  render(projectObj);
 }
-
-let submitButton = document.getElementById('submit-project');
-submitButton.addEventListener('click', (e) => addNewItem(e));
-let todoButton = document.getElementById('submit-todo');
-todoButton.addEventListener('click', (e) => addNewItem(e));
-
-render(projectObj);
-

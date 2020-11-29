@@ -1,4 +1,6 @@
-import { projectObj, render, returnActiveProject, clearActiveProject } from './index';
+import { projectObj } from './index';
+import { render } from './render';
+import { returnActiveProject, clearActiveProject } from './helpers'
 
 
 const newProject = (function() {

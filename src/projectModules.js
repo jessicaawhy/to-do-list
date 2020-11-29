@@ -26,15 +26,18 @@ const newProject = (function() {
   const submit = () => {
     const name = document.getElementById('project-name').value;
 
-    // fix projectObj later, need to fix this
-    clearActiveProject()
-    projectObj[name] = {
-      todo: ['Add tasks here!'],
-      active: true,
+    if (name.length === 0) {
+      alert('Please enter a valid name!');
+    } else {
+      clearActiveProject()
+      projectObj[name] = {
+        todo: ['Add tasks here!'],
+        active: true,
+      }
+  
+      hide();
+      render();
     }
-
-    hide();
-    render();
   }
 
   return { addBtn, cancelBtn, submitBtn, show, hide, submit };
@@ -63,12 +66,15 @@ const newTodo = (function() {
   const submit = () => {
     const name = document.getElementById('todo-name').value;
     
-    // fix projectObj later, need to fix this
-    let current = returnActiveProject();
-    projectObj[current]['todo'].push(name);
-
-    hide();
-    render();
+    if (name.length === 0) {
+      alert('Please enter a valid name!');
+    } else {
+      let current = returnActiveProject();
+      projectObj[current]['todo'].push(name);
+  
+      hide();
+      render();
+    }
   }
 
   return { addBtn, cancelBtn, submitBtn, show, hide, submit };

@@ -1,38 +1,39 @@
-import { createMain, createSidebar, create } from './createPage';
-import { addModalListeners } from './modal';
-
-// createSidebar();
-// createMain();
-addModalListeners();
-addSubmitListeners();
-
-function addSubmitListeners() {
-  let submitButton = document.getElementById('submit-project');
-  submitButton.addEventListener('click', (e) => {
-    addNewItem(e);
-    render();
-  });
-  let todoButton = document.getElementById('submit-todo');
-  todoButton.addEventListener('click', (e) => {
-    addNewItem(e);
-    render();
-  });
-}
+import { create } from './createPage';
+import listeners from './listeners';
 
 const projectObj = {
-  Coding: [
-    'Read articles',
-    'Do challenge problems',
-    'Daily commit'
-  ],
-  Chores: [
-    'Get groceries',
-    'Do laundry',
-    'Wash dishes'
-  ]
+  Coding: {
+    todo: [
+      'Read articles',
+      'Do challenge problems',
+      'Daily commit'
+    ],
+    active: true,
+  },
+  Chores: {
+    todo: [
+      'Get groceries',
+      'Do laundry',
+      'Wash dishes'
+    ],
+    active: false,
+  }
 }
 
-let current = Object.keys(projectObj)[0];
+// delete this
+function returnActiveProject() {
+  for (let key in projectObj) {
+    if (projectObj[key]['active']) {
+      return key;
+    }
+  }
+}
+
+function clearActiveProject() {
+  for (let key in projectObj) {
+    projectObj[key]['active'] = false;
+  }
+}
 
 render();
 
@@ -41,7 +42,7 @@ function render() {
   deleteElements();
   renderSidebar();
   renderMain();
-  addListeners();
+
 }
 
 function deleteElements() {
@@ -96,6 +97,10 @@ function renderSidebar() {
 }
 
 function renderMain() {
+  let current = returnActiveProject();
+  console.log(projectObj[current]['todo'])
+
+
   if (current) {
     let header = document.getElementById('main-project-header');
     header.innerHTML = current;
@@ -104,7 +109,7 @@ function renderMain() {
     let taskButton = document.getElementById('add-todo-button');
     taskButton.style.display = 'block';
     
-    for (let i = 0; i < projectObj[current].length; i++) {
+    for (let i = 0; i < projectObj[current]['todo'].length; i++) {
       let container = create({
         type: 'div', 
         innerHTML: '',
@@ -117,7 +122,7 @@ function renderMain() {
       
       let todo = create({
         type: 'li', 
-        innerHTML: `${projectObj[current][i]}`,
+        innerHTML: `${projectObj[current]['todo'][i]}`,
         attributes: {
           id: ''
         },
@@ -146,60 +151,4 @@ function renderMain() {
   }
 }
 
-function addListeners() {
-  const projects = document.querySelectorAll('.project');
-  const deleteProjects = document.querySelectorAll('.delete-project');
-  const deleteTodos = document.querySelectorAll('.delete-todo');
-
-  projects.forEach(project => project.addEventListener('click', (e) => {
-    switchProjectView(e);
-    render();
-  }))
-  deleteProjects.forEach(project => project.addEventListener('click', (e) => {
-    deleteItem(e);
-    render();
-  }))
-  deleteTodos.forEach(todo => todo.addEventListener('click', (e) => {
-    deleteItem(e);
-    render();
-  }))
-}
-
-function switchProjectView(e) {
-  current = e.target.innerHTML;
-}
-
-function addNewItem(e) {
-  let target = e.target.id
-  if (target === 'submit-todo') {
-    let todo = document.getElementById('todo-name').value;
-    document.getElementById('todo-name').value = '';
-    projectObj[current].push(todo)
-  } else if (target === 'submit-project') {
-    let project = document.getElementById('project-name').value;
-    document.getElementById('project-name').value = '';
-    projectObj[project] = ['Add tasks here!'];
-    current = project;
-  }
-
-  const modal = document.getElementById('todo-modal');
-  modal.style.display = "none";
-}
-
-function deleteItem(e) {
-  let container = e.target.closest('ul').id;
-
-  if (container === 'todo-list') {
-    let target = e.target.parentElement.firstChild.innerHTML;
-    let index = projectObj[current].indexOf(target);
-
-    projectObj[current].splice(index, 1);
-  } else if (container === 'project-list') {
-    let target = e.target.parentElement.firstChild.innerHTML;
-
-    delete projectObj[target];
-    if (current === target) {
-      current = Object.keys(projectObj)[0];
-    }
-  }
-}
+export { projectObj, render, clearActiveProject, returnActiveProject };

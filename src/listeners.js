@@ -1,4 +1,5 @@
 import { newProject, newTodo } from './projectModules';
+import { switchProject, deleteProject, deleteTodo } from './helpers';
 
 newProject.addBtn.addEventListener('click', newProject.show);
 newProject.cancelBtn.addEventListener('click', newProject.hide);
@@ -8,19 +9,17 @@ newTodo.addBtn.addEventListener('click', newTodo.show);
 newTodo.cancelBtn.addEventListener('click', newTodo.hide);
 newTodo.submitBtn.addEventListener('click', newTodo.submit);
 
-// for each project, we want to be able to delete
-function deleteProject() {
+function addProjectListeners() {
+  const projects = document.querySelectorAll('.project');
+  projects.forEach(project => project.addEventListener('click', (e) => switchProject(e)));
 
+  const deleteBtns = document.querySelectorAll('.delete-project');
+  deleteBtns.forEach(btn => btn.addEventListener('click', (e) => deleteProject(e)));
 }
 
-// for each project, we want to be able to switch projects
-function switchProject() {
-
+function addTodoListeners() {
+  const deleteBtns = document.querySelectorAll('.delete-todo');
+  deleteBtns.forEach(btn => btn.addEventListener('click', (e) => deleteTodo(e)));
 }
 
-// for each todo, we want to be able to delete
-function deleteTodo() {
-
-}
-
-// export { deleteProject, switchProject, deleteTodo };
+export { addProjectListeners, addTodoListeners };

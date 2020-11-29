@@ -1,6 +1,6 @@
 import { projectObj } from './index';
 import { render } from './render';
-import { returnActiveProject, clearActiveProject } from './helpers'
+import { returnActiveProject, clearActiveProject } from './helpers';
 
 
 const newProject = (function() {
@@ -37,7 +37,7 @@ const newProject = (function() {
     render();
   }
 
-  return { addBtn, cancelBtn, submitBtn, show, hide, submit }
+  return { addBtn, cancelBtn, submitBtn, show, hide, submit };
 }());
 
 const newTodo = (function() {
@@ -64,8 +64,8 @@ const newTodo = (function() {
     const name = document.getElementById('todo-name').value;
     
     // fix projectObj later, need to fix this
-    let current = returnActiveProject()
-    projectObj[current]['todo'].push(name)
+    let current = returnActiveProject();
+    projectObj[current]['todo'].push(name);
 
     hide();
     render();

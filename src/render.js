@@ -1,11 +1,14 @@
 import { projectObj } from './index';
 import { create } from './create';
 import { returnActiveProject } from './helpers';
+import { addProjectListeners, addTodoListeners } from './listeners';
 
 function render() {
   deleteElements();
   renderSidebar();
   renderMain();
+  addProjectListeners();
+  addTodoListeners();
 }
 
 function deleteElements() {
@@ -61,8 +64,6 @@ function renderSidebar() {
 
 function renderMain() {
   let current = returnActiveProject();
-  console.log(projectObj[current]['todo'])
-
 
   if (current) {
     let header = document.getElementById('main-project-header');

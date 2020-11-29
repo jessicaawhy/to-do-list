@@ -1,5 +1,3 @@
-import { create } from './create';
-import listeners from './listeners';
 import { render } from './render';
 
 const projectObj = {

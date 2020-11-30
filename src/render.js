@@ -93,6 +93,27 @@ function renderMain() {
         classList: [],
         parentElement: container,
       })
+
+      let btnContainer = create({
+        type: 'div', 
+        innerHTML: '',
+        attributes: {
+          id: ''
+        },
+        classList: ['todo-btn-container'],
+        parentElement: container,
+      })
+      
+      let editButton = create({
+        type: 'img', 
+        innerHTML: '',
+        attributes: {
+          id: '',
+          src: '../src/public/edit-pencil.png'
+        },
+        classList: ['edit-todo'],
+        parentElement: btnContainer,
+      })
       
       let deleteButton = create({
         type: 'span', 
@@ -101,7 +122,7 @@ function renderMain() {
           id: ''
         },
         classList: ['delete-todo'],
-        parentElement: container,
+        parentElement: btnContainer,
       })
     }
     

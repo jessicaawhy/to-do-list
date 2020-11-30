@@ -71,7 +71,6 @@ li {
   font-family: 'Big Shoulders Inline Text', cursive;
   font-weight: 400;
   padding-right: 10px;
-  
 }
 
 #project-list > div > span {
@@ -103,14 +102,18 @@ li {
   border-bottom: 1px dashed var(--accent-color);
 }
 
-/* #todo-list > div > li {
-  padding: 10px 25px;
-  border-bottom: 1px dashed var(--accent-color);
-} */
+.todo-btn-container {
+  display: flex;
+  align-items: center;
+}
 
-#todo-list > div > span {
-  color: var(--button-color);
-  font-size: larger;
+.delete-todo {
+  font-size: 25px;
+}
+
+.edit-todo {
+  height: 15px;
+  padding: 0px 10px;
 }
 
 #add-todo-button {

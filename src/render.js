@@ -177,7 +177,7 @@ function renderMain() {
           id: '',
           src: ''
         },
-        classList: [],
+        classList: ['submit-todo-edit'],
         parentElement: inputBtnContainer,
       })
       
@@ -187,7 +187,7 @@ function renderMain() {
         attributes: {
           id: ''
         },
-        classList: [],
+        classList: ['cancel-todo-edit'],
         parentElement: inputBtnContainer,
       })
     }

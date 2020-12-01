@@ -60,7 +60,7 @@ function hideTodoInputs() {
   edit.forEach(element => element.style.display = 'none');
 }
 
-function editTodo(e) {
+function toggleEditView(e) {
   hideTodoInputs();
 
   const target = e.target.closest('.normal-view');
@@ -70,6 +70,18 @@ function editTodo(e) {
   input.style.display = 'flex';
 }
 
+function submitTodoEdit(e) {
+  let oldTodo = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
+  let currentProj = returnActiveProject();
+  let index = projectObj[currentProj]['todo'].indexOf(oldTodo)
+
+  let newTodo = e.target.closest('.edit-view').querySelector('input').value;
+
+  projectObj[currentProj]['todo'][index] = newTodo;
+
+  render();
+}
+
 export { 
   returnActiveProject, 
   clearActiveProject, 
@@ -77,6 +89,8 @@ export {
   switchProject, 
   deleteProject, 
   deleteTodo,
-  editTodo 
+  toggleEditView,
+  hideTodoInputs,
+  submitTodoEdit
 };
           

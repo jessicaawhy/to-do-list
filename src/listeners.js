@@ -1,5 +1,5 @@
 import { newProject, newTodo } from './projectModules';
-import { switchProject, deleteProject, deleteTodo, editTodo } from './helpers';
+import { switchProject, deleteProject, deleteTodo, toggleEditView, hideTodoInputs, submitTodoEdit } from './helpers';
 
 newProject.addBtn.addEventListener('click', newProject.show);
 newProject.cancelBtn.addEventListener('click', newProject.hide);
@@ -22,7 +22,13 @@ function addTodoListeners() {
   deleteBtns.forEach(btn => btn.addEventListener('click', (e) => deleteTodo(e)));
 
   const editBtns = document.querySelectorAll('.edit-todo');
-  editBtns.forEach(btn => btn.addEventListener('click', (e) => editTodo(e)));
+  editBtns.forEach(btn => btn.addEventListener('click', (e) => toggleEditView(e)));
+
+  const submitBtns = document.querySelectorAll('.submit-todo-edit');
+  submitBtns.forEach(btn => btn.addEventListener('click', (e) => submitTodoEdit(e)));
+
+  const cancelBtns = document.querySelectorAll('.cancel-todo-edit');
+  cancelBtns.forEach(btn => btn.addEventListener('click', hideTodoInputs));
 }
 
 export { addProjectListeners, addTodoListeners };

@@ -80,8 +80,19 @@ function renderMain() {
         attributes: {
           id: ''
         },
-        classList: [],
+        classList: ['todo-item-container'],
         parentID: 'todo-list',
+      })
+
+      // create normal view container
+      let normalView = create({
+        type: 'div', 
+        innerHTML: '',
+        attributes: {
+          id: ''
+        },
+        classList: ['normal-view'],
+        parentElement: container,
       })
       
       let todo = create({
@@ -90,8 +101,8 @@ function renderMain() {
         attributes: {
           id: ''
         },
-        classList: [],
-        parentElement: container,
+        classList: ['todo-text'],
+        parentElement: normalView,
       })
 
       let btnContainer = create({
@@ -101,7 +112,7 @@ function renderMain() {
           id: ''
         },
         classList: ['todo-btn-container'],
-        parentElement: container,
+        parentElement: normalView,
       })
       
       let editButton = create({
@@ -123,6 +134,61 @@ function renderMain() {
         },
         classList: ['delete-todo'],
         parentElement: btnContainer,
+      })
+
+      // create edit view container
+
+      let editView = create({
+        type: 'div', 
+        innerHTML: '',
+        attributes: {
+          id: ''
+        },
+        classList: ['edit-view'],
+        parentElement: container,
+      })
+      editView.style.display = 'none';
+
+      let todoInput = create({
+        type: 'input', 
+        innerHTML: '',
+        attributes: {
+          id: '',
+          value: `${projectObj[current]['todo'][i]}`,
+        },
+        classList: ['todo-input'],
+        parentElement: editView,
+      })
+
+      let inputBtnContainer = create({
+        type: 'div', 
+        innerHTML: '',
+        attributes: {
+          id: ''
+        },
+        classList: ['todo-btn-container'],
+        parentElement: editView,
+      })
+      
+      let submit = create({
+        type: 'button', 
+        innerHTML: 'submit',
+        attributes: {
+          id: '',
+          src: ''
+        },
+        classList: [],
+        parentElement: inputBtnContainer,
+      })
+      
+      let cancel = create({
+        type: 'button', 
+        innerHTML: 'cancel',
+        attributes: {
+          id: ''
+        },
+        classList: [],
+        parentElement: inputBtnContainer,
       })
     }
     

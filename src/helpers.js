@@ -42,7 +42,7 @@ function deleteProject(e) {
 }
 
 function deleteTodo(e) {
-  const target = e.target.parentElement.firstChild.innerHTML;
+  const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
 
   const active = returnActiveProject();
   const index = projectObj[active]['todo'].indexOf(target);
@@ -52,10 +52,31 @@ function deleteTodo(e) {
   render();
 }
 
-export { returnActiveProject, 
-          clearActiveProject, 
-          setActiveProject, 
-          switchProject, 
-          deleteProject, 
-          deleteTodo };
+function hideTodoInputs() {
+  const normal = document.querySelectorAll('.normal-view');
+  normal.forEach(element => element.style.display = 'flex');
+
+  const edit = document.querySelectorAll('.edit-view');
+  edit.forEach(element => element.style.display = 'none');
+}
+
+function editTodo(e) {
+  hideTodoInputs();
+
+  const target = e.target.closest('.normal-view');
+  target.style.display = 'none';
+
+  const input = e.target.closest('.todo-item-container').querySelector('.edit-view')
+  input.style.display = 'flex';
+}
+
+export { 
+  returnActiveProject, 
+  clearActiveProject, 
+  setActiveProject, 
+  switchProject, 
+  deleteProject, 
+  deleteTodo,
+  editTodo 
+};
           

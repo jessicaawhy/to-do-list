@@ -92,14 +92,16 @@ li {
   margin: 10px 0 5px 0;
 }
 
+.todo-item-container {
+  border-bottom: 1px dashed var(--accent-color);
+}
 
-#todo-list > div {
+.todo-item-container > div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 10px 25px;
-  border-bottom: 1px dashed var(--accent-color);
 }
 
 .todo-btn-container {
@@ -112,8 +114,21 @@ li {
 }
 
 .edit-todo {
+  display: none;
   height: 15px;
   padding: 0px 10px;
+}
+
+.todo-item-container:hover .edit-todo {
+  display: flex;
+}
+
+.todo-input {
+  flex-grow: 1;
+  font-size: 25px;
+  border: 1px solid var(--button-color);
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 #add-todo-button {

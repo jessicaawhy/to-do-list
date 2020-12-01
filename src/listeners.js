@@ -1,5 +1,5 @@
 import { newProject, newTodo } from './projectModules';
-import { switchProject, deleteProject, deleteTodo } from './helpers';
+import { switchProject, deleteProject, deleteTodo, editTodo } from './helpers';
 
 newProject.addBtn.addEventListener('click', newProject.show);
 newProject.cancelBtn.addEventListener('click', newProject.hide);
@@ -20,6 +20,9 @@ function addProjectListeners() {
 function addTodoListeners() {
   const deleteBtns = document.querySelectorAll('.delete-todo');
   deleteBtns.forEach(btn => btn.addEventListener('click', (e) => deleteTodo(e)));
+
+  const editBtns = document.querySelectorAll('.edit-todo');
+  editBtns.forEach(btn => btn.addEventListener('click', (e) => editTodo(e)));
 }
 
 export { addProjectListeners, addTodoListeners };

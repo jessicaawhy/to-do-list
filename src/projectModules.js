@@ -1,6 +1,6 @@
 import { projectObj } from './index';
 import { render } from './render';
-import { returnActiveProject, clearActiveProject } from './helpers';
+import { returnActiveProject, clearActiveProject, saveToStorage } from './helpers';
 
 
 const newProject = (function() {
@@ -36,6 +36,7 @@ const newProject = (function() {
       }
   
       hide();
+      saveToStorage();
       render();
     }
   }
@@ -73,6 +74,7 @@ const newTodo = (function() {
       projectObj[current]['todo'].push(name);
   
       hide();
+      saveToStorage();
       render();
     }
   }

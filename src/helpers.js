@@ -18,6 +18,8 @@ function clearActiveProject() {
 function setActiveProject() {
   let target = Object.keys(projectObj)[0];
   projectObj[target]['active'] = true;
+
+  saveToStorage();
 }
 
 function switchProject(e) {
@@ -25,7 +27,8 @@ function switchProject(e) {
 
   const target = e.target.parentElement.firstChild.innerHTML;
   projectObj[target]['active'] = true;
-  
+
+  saveToStorage();
   render();
 }
 
@@ -38,6 +41,7 @@ function deleteProject(e) {
     setActiveProject();
   }
 
+  saveToStorage();
   render();
 }
 
@@ -49,6 +53,7 @@ function deleteTodo(e) {
 
   projectObj[active]['todo'].splice(index, 1);
 
+  saveToStorage();
   render();
 }
 
@@ -78,8 +83,12 @@ function submitTodoEdit(e) {
   let newTodo = e.target.closest('.edit-view').querySelector('input').value;
 
   projectObj[currentProj]['todo'][index] = newTodo;
-
+  saveToStorage();
   render();
+}
+
+function saveToStorage() {
+  localStorage.setItem('projects', JSON.stringify(projectObj));
 }
 
 export { 
@@ -91,6 +100,7 @@ export {
   deleteTodo,
   toggleEditView,
   hideTodoInputs,
-  submitTodoEdit
+  submitTodoEdit,
+  saveToStorage
 };
           

@@ -94,27 +94,48 @@ function renderMain() {
         classList: ['normal-view'],
         parentElement: container,
       })
+
+      let checkBox = create({
+        type: 'input', 
+        innerHTML: '',
+        attributes: {
+          id: '',
+          type: 'checkbox'
+        },
+        classList: ['todo-checkbox'],
+        parentElement: normalView,
+      })
       
       let todo = create({
         type: 'li', 
-        innerHTML: `${projectObj[current]['todo'][i]}`,
+        innerHTML: `${projectObj[current]['todo'][i]['name']}`,
         attributes: {
           id: ''
         },
         classList: ['todo-text'],
         parentElement: normalView,
       })
-
-      let btnContainer = create({
+      
+      let endContainer = create({
         type: 'div', 
         innerHTML: '',
         attributes: {
           id: ''
         },
-        classList: ['todo-btn-container'],
+        classList: ['end-container'],
         parentElement: normalView,
       })
-      
+
+      let dateElement = create({
+        type: 'span', 
+        innerHTML: `${projectObj[current]['todo'][i]['dueDate']}`,
+        attributes: {
+          id: '',
+        },
+        classList: ['todo-date'],
+        parentElement: endContainer,
+      })
+
       let editButton = create({
         type: 'img', 
         innerHTML: '',
@@ -122,8 +143,8 @@ function renderMain() {
           id: '',
           src: '../src/public/edit-pencil.png'
         },
-        classList: ['edit-todo'],
-        parentElement: btnContainer,
+        classList: ['todo-edit-btn'],
+        parentElement: endContainer,
       })
       
       let deleteButton = create({
@@ -132,8 +153,8 @@ function renderMain() {
         attributes: {
           id: ''
         },
-        classList: ['delete-todo'],
-        parentElement: btnContainer,
+        classList: ['todo-delete-btn'],
+        parentElement: endContainer,
       })
 
       // create edit view container
@@ -154,22 +175,33 @@ function renderMain() {
         innerHTML: '',
         attributes: {
           id: '',
-          value: `${projectObj[current]['todo'][i]}`,
+          value: `${projectObj[current]['todo'][i]['name']}`,
         },
-        classList: ['todo-input'],
+        classList: ['todo-text-input'],
         parentElement: editView,
       })
 
-      let inputBtnContainer = create({
+      let editEndContainer = create({
         type: 'div', 
         innerHTML: '',
         attributes: {
           id: ''
         },
-        classList: ['todo-btn-container'],
+        classList: ['end-container'],
         parentElement: editView,
       })
-      
+
+      let dateInput = create({
+        type: 'input', 
+        innerHTML: 'Today',
+        attributes: {
+          id: '',
+          value: `${projectObj[current]['todo'][i]['dueDate']}`,
+        },
+        classList: ['todo-date-input'],
+        parentElement: editEndContainer,
+      })
+
       let submit = create({
         type: 'button', 
         innerHTML: 'submit',
@@ -177,8 +209,8 @@ function renderMain() {
           id: '',
           src: ''
         },
-        classList: ['submit-todo-edit'],
-        parentElement: inputBtnContainer,
+        classList: ['todo-submit-btn'],
+        parentElement: editEndContainer,
       })
       
       let cancel = create({
@@ -187,8 +219,8 @@ function renderMain() {
         attributes: {
           id: ''
         },
-        classList: ['cancel-todo-edit'],
-        parentElement: inputBtnContainer,
+        classList: ['todo-cancel-btn'],
+        parentElement: editEndContainer,
       })
     }
     

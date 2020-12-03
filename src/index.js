@@ -1,30 +1,54 @@
 import { render } from './render';
 
-if (!localStorage.getItem('projects')) {
+if (!localStorage.getItem('projects1')) {
 
   let myProjects = {
     Coding: {
       todo: [
-        'Read articles',
-        'Do challenge problems',
-        'Daily commit'
+        {
+          name: 'Read articles',
+          dueDate: '',
+          complete: false,
+        },
+        {
+          name: 'Do challenge problems',
+          dueDate: '',
+          complete: false,
+        },
+        {
+          name: 'Daily commit',
+          dueDate: '',
+          complete: false,
+        }
       ],
       active: true,
     },
     Chores: {
       todo: [
-        'Get groceries',
-        'Do laundry',
-        'Wash dishes'
+        {
+          name: 'Get groceries',
+          dueDate: '',
+          complete: false,
+        },
+        {
+          name: 'Do laundry',
+          dueDate: '',
+          complete: false,
+        },
+        {
+          name: 'Wash dishes',
+          dueDate: '',
+          complete: false,
+        }
       ],
       active: false,
     }
   }
 
-  localStorage.setItem('projects', JSON.stringify(myProjects));
+  localStorage.setItem('projects1', JSON.stringify(myProjects));
 }
 
-const projectObj = JSON.parse(localStorage.getItem('projects'))
+const projectObj = JSON.parse(localStorage.getItem('projects1'))
 
 render();
 

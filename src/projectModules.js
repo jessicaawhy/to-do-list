@@ -31,7 +31,11 @@ const newProject = (function() {
     } else {
       clearActiveProject()
       projectObj[name] = {
-        todo: ['Add tasks here!'],
+        todo: [{
+          name: 'Add tasks here!',
+          dueDate: '',
+          complete: false
+        }],
         active: true,
       }
   
@@ -71,7 +75,11 @@ const newTodo = (function() {
       alert('Please enter a valid name!');
     } else {
       let current = returnActiveProject();
-      projectObj[current]['todo'].push(name);
+      projectObj[current]['todo'].push({
+        name: name,
+        dueDate: '',
+        complete: false
+      });
   
       hide();
       saveToStorage();

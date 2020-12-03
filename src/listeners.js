@@ -18,16 +18,16 @@ function addProjectListeners() {
 }
 
 function addTodoListeners() {
-  const deleteBtns = document.querySelectorAll('.delete-todo');
+  const deleteBtns = document.querySelectorAll('.todo-delete-btn');
   deleteBtns.forEach(btn => btn.addEventListener('click', (e) => deleteTodo(e)));
 
-  const editBtns = document.querySelectorAll('.edit-todo');
+  const editBtns = document.querySelectorAll('.todo-edit-btn');
   editBtns.forEach(btn => btn.addEventListener('click', (e) => toggleEditView(e)));
 
-  const submitBtns = document.querySelectorAll('.submit-todo-edit');
+  const submitBtns = document.querySelectorAll('.todo-submit-btn');
   submitBtns.forEach(btn => btn.addEventListener('click', (e) => submitTodoEdit(e)));
 
-  const cancelBtns = document.querySelectorAll('.cancel-todo-edit');
+  const cancelBtns = document.querySelectorAll('.todo-cancel-btn');
   cancelBtns.forEach(btn => btn.addEventListener('click', hideTodoInputs));
 }
 

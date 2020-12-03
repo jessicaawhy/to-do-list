@@ -49,7 +49,13 @@ function deleteTodo(e) {
   const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
 
   const active = returnActiveProject();
-  const index = projectObj[active]['todo'].indexOf(target);
+  let index; 
+
+  for (let i = 0; i < projectObj[active]['todo'].length; i++) {
+    if (projectObj[active]['todo'][i]['name'] === target) {
+      index = i;
+    }
+  } 
 
   projectObj[active]['todo'].splice(index, 1);
 
@@ -78,17 +84,26 @@ function toggleEditView(e) {
 function submitTodoEdit(e) {
   let oldTodo = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
   let currentProj = returnActiveProject();
-  let index = projectObj[currentProj]['todo'].indexOf(oldTodo)
 
-  let newTodo = e.target.closest('.edit-view').querySelector('input').value;
+  let index; 
 
-  projectObj[currentProj]['todo'][index] = newTodo;
+  for (let i = 0; i < projectObj[currentProj]['todo'].length; i++) {
+    if (projectObj[currentProj]['todo'][i]['name'] === oldTodo) {
+      index = i;
+    }
+  } 
+
+  let newTodo = e.target.closest('.edit-view').querySelector('.todo-text-input').value;
+  let newDate = e.target.closest('.edit-view').querySelector('.todo-date-input').value;
+
+  projectObj[currentProj]['todo'][index]['name'] = newTodo;
+  projectObj[currentProj]['todo'][index]['dueDate'] = newDate;
   saveToStorage();
   render();
 }
 
 function saveToStorage() {
-  localStorage.setItem('projects', JSON.stringify(projectObj));
+  localStorage.setItem('projects1', JSON.stringify(projectObj));
 }
 
 export { 
@@ -103,4 +118,4 @@ export {
   submitTodoEdit,
   saveToStorage
 };
-          
+        

@@ -98,37 +98,47 @@ li {
 
 .todo-item-container > div {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 25px;
+  padding: 15px 15px;
+  height: 35px;
 }
 
-.todo-btn-container {
-  display: flex;
-  align-items: center;
+.normal-view > * {
+  margin: 0px 15px;
 }
 
-.delete-todo {
+.todo-text {
+  flex-grow: 1;
+}
+
+.todo-delete-btn {
   font-size: 25px;
 }
 
-.edit-todo {
-  display: none;
+.todo-edit-btn {
   height: 15px;
-  padding: 0px 10px;
 }
 
-.todo-item-container:hover .edit-todo {
-  display: flex;
+.end-container > *{
+  margin: 0px 5px;
 }
 
-.todo-input {
+.todo-text-input {
   flex-grow: 1;
   font-size: 25px;
   border: 1px solid var(--button-color);
   border-radius: 5px;
   margin-right: 10px;
+}
+
+.todo-date-input {
+  font-size: 25px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.end-container > button {
+  padding: 5px 5px;
 }
 
 #add-todo-button {

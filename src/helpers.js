@@ -52,12 +52,12 @@ function switchProject(e) {
   render();
 }
 
-function createTodo(name) {
+function createTodo(name, date) {
   let current = returnActiveProject();
 
   projectObj[current]['todo'].push({
     name: name,
-    dueDate: '',
+    dueDate: date,
     complete: false
   });
 }
@@ -127,6 +127,28 @@ function saveToStorage() {
   localStorage.setItem('projects1', JSON.stringify(projectObj));
 }
 
+function toggleCompletion(e) {
+  const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
+
+  const active = returnActiveProject();
+  let index; 
+
+  for (let i = 0; i < projectObj[active]['todo'].length; i++) {
+    if (projectObj[active]['todo'][i]['name'] === target) {
+      index = i;
+    }
+  }
+
+  if (projectObj[active]['todo'][index]['complete']) {
+    projectObj[active]['todo'][index]['complete'] = false;
+  } else {
+    projectObj[active]['todo'][index]['complete'] = true;
+  }
+
+  saveToStorage();
+  render();
+}
+
 export { 
   returnActiveProject, 
   clearActiveProject, 
@@ -139,6 +161,7 @@ export {
   submitTodoEdit,
   saveToStorage,
   createProject,
-  createTodo
+  createTodo,
+  toggleCompletion
 };
         

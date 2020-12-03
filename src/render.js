@@ -1,7 +1,7 @@
 import { projectObj } from './index';
 import { create } from './create';
 import { returnActiveProject } from './helpers';
-import { addProjectListeners, addTodoListeners } from './listeners';
+import { addProjectListeners, addTodoListeners, addCheckboxListeners } from './listeners';
 
 function render() {
   deleteElements();
@@ -9,6 +9,7 @@ function render() {
   renderMain();
   addProjectListeners();
   addTodoListeners();
+  addCheckboxListeners();
 }
 
 function deleteElements() {
@@ -157,6 +158,14 @@ function renderMain() {
         parentElement: endContainer,
       })
 
+      if (projectObj[current]['todo'][i]['complete']) {
+        checkBox.checked = true;
+        normalView.classList.add('complete')
+      } else {
+        checkBox.checked = false;
+        normalView.classList.remove('complete')
+      }
+
       // create edit view container
 
       let editView = create({
@@ -197,6 +206,7 @@ function renderMain() {
         attributes: {
           id: '',
           value: `${projectObj[current]['todo'][i]['dueDate']}`,
+          type: 'date'
         },
         classList: ['todo-date-input'],
         parentElement: editEndContainer,

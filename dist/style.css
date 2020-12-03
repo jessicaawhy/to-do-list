@@ -193,3 +193,9 @@ input {
 .button-container > button {
   padding: 1px 6px;
 }
+
+.complete > li,
+.complete > div >.todo-date {
+  text-decoration: line-through;
+  color: gray;
+}

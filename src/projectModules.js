@@ -43,6 +43,7 @@ const newProject = (function() {
 const newTodo = (function() {
   const _modal = document.getElementById('todo-modal');
   const _todoName = document.getElementById('todo-name');
+  const _todoDate = document.getElementById('todo-date');
   
   const addBtn = document.getElementById("add-todo-button");
   const cancelBtn = _modal.querySelector('.cancel');
@@ -63,11 +64,12 @@ const newTodo = (function() {
 
   const submit = () => {
     const name = _todoName.value;
+    const date = _todoDate.value;
 
     if (name.length === 0) {
       alert('Please enter a valid name!');
     } else {
-      createTodo(name)
+      createTodo(name, date)
       hide();
       saveToStorage();
       render();

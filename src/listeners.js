@@ -1,5 +1,5 @@
 import { newProject, newTodo } from './projectModules';
-import { switchProject, deleteProject, deleteTodo, toggleEditView, hideTodoInputs, submitTodoEdit } from './helpers';
+import { switchProject, deleteProject, deleteTodo, toggleEditView, hideTodoInputs, submitTodoEdit, toggleCompletion } from './helpers';
 
 newProject.addBtn.addEventListener('click', newProject.show);
 newProject.cancelBtn.addEventListener('click', newProject.hide);
@@ -31,4 +31,9 @@ function addTodoListeners() {
   cancelBtns.forEach(btn => btn.addEventListener('click', hideTodoInputs));
 }
 
-export { addProjectListeners, addTodoListeners };
+function addCheckboxListeners() {
+  const checkboxes = document.querySelectorAll('.todo-checkbox');
+  checkboxes.forEach(box => box.addEventListener('change',(e) => toggleCompletion(e)))
+}
+
+export { addProjectListeners, addTodoListeners, addCheckboxListeners };

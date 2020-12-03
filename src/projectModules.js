@@ -1,17 +1,17 @@
-import { projectObj } from './index';
 import { render } from './render';
-import { returnActiveProject, clearActiveProject, saveToStorage } from './helpers';
+import { clearActiveProject, saveToStorage, createProject, createTodo } from './helpers';
 
 
 const newProject = (function() {
   const _modal = document.getElementById('project-modal');
+  const _projectName = document.getElementById('project-name');
 
   const addBtn = document.getElementById("add-project-button");
   const cancelBtn = _modal.querySelector('.cancel');
   const submitBtn = document.getElementById('submit-project');
   
   const _clearInputs = () => {
-    document.getElementById('project-name').value = '';
+    _projectName.value = '';
   }
 
   const show = () => {
@@ -24,21 +24,13 @@ const newProject = (function() {
   }
 
   const submit = () => {
-    const name = document.getElementById('project-name').value;
+    const name = _projectName.value;
 
     if (name.length === 0) {
       alert('Please enter a valid name!');
     } else {
       clearActiveProject()
-      projectObj[name] = {
-        todo: [{
-          name: 'Add tasks here!',
-          dueDate: '',
-          complete: false
-        }],
-        active: true,
-      }
-  
+      createProject(name);
       hide();
       saveToStorage();
       render();
@@ -50,13 +42,14 @@ const newProject = (function() {
 
 const newTodo = (function() {
   const _modal = document.getElementById('todo-modal');
+  const _todoName = document.getElementById('todo-name');
   
   const addBtn = document.getElementById("add-todo-button");
   const cancelBtn = _modal.querySelector('.cancel');
   const submitBtn = document.getElementById('submit-todo');
   
   const _clearInputs = () => {
-    document.getElementById('todo-name').value = '';
+    _todoName.value = '';
   }
   
   const show = () => {
@@ -69,18 +62,12 @@ const newTodo = (function() {
   }
 
   const submit = () => {
-    const name = document.getElementById('todo-name').value;
-    
+    const name = _todoName.value;
+
     if (name.length === 0) {
       alert('Please enter a valid name!');
     } else {
-      let current = returnActiveProject();
-      projectObj[current]['todo'].push({
-        name: name,
-        dueDate: '',
-        complete: false
-      });
-  
+      createTodo(name)
       hide();
       saveToStorage();
       render();

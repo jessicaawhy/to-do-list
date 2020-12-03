@@ -1,6 +1,26 @@
 import { projectObj } from './index';
 import { render } from './render';
 
+function createProject(name) {
+  projectObj[name] = {
+    todo: [],
+    active: true,
+  }
+}
+
+function deleteProject(e) {
+  const target = e.target.parentElement.firstChild.innerHTML;
+  delete projectObj[target];
+
+  const isActive = returnActiveProject();
+  if (Object.keys(projectObj).length > 0 && (!isActive)) {
+    setActiveProject();
+  }
+
+  saveToStorage();
+  render();
+}
+
 function returnActiveProject() {
   for (let key in projectObj) {
     if (projectObj[key]['active']) {
@@ -32,17 +52,14 @@ function switchProject(e) {
   render();
 }
 
-function deleteProject(e) {
-  const target = e.target.parentElement.firstChild.innerHTML;
-  delete projectObj[target];
+function createTodo(name) {
+  let current = returnActiveProject();
 
-  const isActive = returnActiveProject();
-  if (Object.keys(projectObj).length > 0 && (!isActive)) {
-    setActiveProject();
-  }
-
-  saveToStorage();
-  render();
+  projectObj[current]['todo'].push({
+    name: name,
+    dueDate: '',
+    complete: false
+  });
 }
 
 function deleteTodo(e) {
@@ -96,10 +113,14 @@ function submitTodoEdit(e) {
   let newTodo = e.target.closest('.edit-view').querySelector('.todo-text-input').value;
   let newDate = e.target.closest('.edit-view').querySelector('.todo-date-input').value;
 
-  projectObj[currentProj]['todo'][index]['name'] = newTodo;
-  projectObj[currentProj]['todo'][index]['dueDate'] = newDate;
-  saveToStorage();
-  render();
+  if (newTodo.length === 0) {
+    alert('Please enter a valid task!');
+  } else {
+    projectObj[currentProj]['todo'][index]['name'] = newTodo;
+    projectObj[currentProj]['todo'][index]['dueDate'] = newDate;
+    saveToStorage();
+    render();
+  }
 }
 
 function saveToStorage() {
@@ -116,6 +137,8 @@ export {
   toggleEditView,
   hideTodoInputs,
   submitTodoEdit,
-  saveToStorage
+  saveToStorage,
+  createProject,
+  createTodo
 };
         

@@ -193,7 +193,7 @@ function renderMain() {
 
       let dateInput = create({
         type: 'input', 
-        innerHTML: 'Today',
+        innerHTML: '',
         attributes: {
           id: '',
           value: `${projectObj[current]['todo'][i]['dueDate']}`,

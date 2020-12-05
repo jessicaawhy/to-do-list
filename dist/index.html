@@ -8,35 +8,30 @@
   <body>
     <div id="content">
       <div id="sidebar-area">
-        <div id="sidebar">
 
-          <div id="view">
-            <h2>home</h2>
-          </div>
-
-          <div>
-            <div id="sidebar-header-area">
-              <h2>projects</h2>
-              <span id="add-project-button">+</span>
-            </div>
-            <ul id="project-list"></ul>
-          </div>
-
+        <div id="sidebar-header-area">
+          <img src="../src/public/home.png" id="home">
+          <h2>Projects</h2>
         </div>
+
+        <div id="sidebar-container">
+          <ul id="project-list"></ul>
+          <div id="add-project-button">+ Project</div>
+        </div>
+
       </div>
 
       <div id="main-area">
-        <div id="main">
 
-          <div id="main-container">
-            <div id="main-header-area">
-              <h2 id="main-project-header"></h2>
-            </div>
-            <ul id="todo-list"></ul>
-            <p id="add-todo-button">+ Add Task</p>
-          </div>
-
+        <div id="main-header-area">
+          <h2 id="main-project-header"></h2>
         </div>
+
+        <div id="main-container">
+          <ul id="todo-list"></ul>
+          <div id="add-todo-button">+ Task</div>
+        </div>
+
       </div>
 
       <div id="project-modal" class="modal">

@@ -29,6 +29,14 @@ function deleteProject(e) {
   render();
 }
 
+function setAllProjectsActive() {
+  for (let key in projectObj) {
+    projectObj[key]['active'] = true;
+  }
+
+  saveToStorage();
+}
+
 function clearActiveProjects() {
   for (let key in projectObj) {
     projectObj[key]['active'] = false;
@@ -188,6 +196,11 @@ function toggleCompletion(e) {
   renderMain();
 }
 
+function showAllTodos() {
+  setAllProjectsActive();
+  render();
+}
+
 export { 
   returnActiveProjects, 
   returnAllProjects, 
@@ -200,6 +213,7 @@ export {
   toggleEditView,
   submitTodoEdit,
   hideTodoInputs,
-  toggleCompletion
+  toggleCompletion,
+  showAllTodos
 };
         

@@ -6,7 +6,8 @@ import {
   toggleEditView,
   submitTodoEdit,
   hideTodoInputs,
-  toggleCompletion 
+  toggleCompletion,
+  showAllTodos 
 } from './helpers';
 
 newProject.addBtn.addEventListener('click', newProject.show);
@@ -23,6 +24,9 @@ function addProjectListeners() {
 
   const deleteBtns = document.querySelectorAll('.delete-project');
   deleteBtns.forEach(btn => btn.addEventListener('click', (e) => deleteProject(e)));
+
+  const home = document.getElementById('home');
+  home.addEventListener('click', showAllTodos);
 }
 
 function addTodoListeners() {

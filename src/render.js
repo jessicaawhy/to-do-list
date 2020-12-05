@@ -84,13 +84,14 @@ function renderMain() {
   let todos = returnActiveTodos();
   
   for (let i = 0; i < todos.length; i++) {
+
     let container = create({
       type: 'div', 
       innerHTML: '',
       attributes: {
         id: ''
       },
-      classList: ['todo-item-container'],
+      classList: ['todo-item-container', todos[i]['project']],
       parentID: 'todo-list',
     })
 

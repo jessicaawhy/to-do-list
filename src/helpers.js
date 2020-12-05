@@ -112,19 +112,18 @@ function createTodo(name, date) {
 }
 
 function deleteTodo(e) {
+  const project = e.target.closest('.todo-item-container').classList[1];
   const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
 
-  const active = returnActiveProjects();
-  let index; 
-  // need to find a better way to do this
+  let index
 
-  for (let i = 0; i < projectObj[active]['todo'].length; i++) {
-    if (projectObj[active]['todo'][i]['name'] === target) {
+  for (let i = 0; i < projectObj[project]['todo'].length; i++) {
+    if (projectObj[project]['todo'][i]['name'] === target) {
       index = i;
     }
-  } 
+  }
 
-  projectObj[active]['todo'].splice(index, 1);
+  projectObj[project]['todo'].splice(index, 1);
 
   saveToStorage();
   renderMain();
@@ -149,16 +148,16 @@ function toggleEditView(e) {
 }
 
 function submitTodoEdit(e) {
-  let oldTodo = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
-  let currentProj = returnActiveProjects();
+  const project = e.target.closest('.todo-item-container').classList[1];
+  const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
 
-  let index; 
+  let index
 
-  for (let i = 0; i < projectObj[currentProj]['todo'].length; i++) {
-    if (projectObj[currentProj]['todo'][i]['name'] === oldTodo) {
+  for (let i = 0; i < projectObj[project]['todo'].length; i++) {
+    if (projectObj[project]['todo'][i]['name'] === target) {
       index = i;
     }
-  } 
+  }
 
   let newTodo = e.target.closest('.edit-view').querySelector('.todo-text-input').value;
   let newDate = e.target.closest('.edit-view').querySelector('.todo-date-input').value;
@@ -166,8 +165,8 @@ function submitTodoEdit(e) {
   if (newTodo.length === 0) {
     alert('Please enter a valid task!');
   } else {
-    projectObj[currentProj]['todo'][index]['name'] = newTodo;
-    projectObj[currentProj]['todo'][index]['dueDate'] = newDate;
+    projectObj[project]['todo'][index]['name'] = newTodo;
+    projectObj[project]['todo'][index]['dueDate'] = newDate;
     
     saveToStorage();
     renderMain();
@@ -175,21 +174,21 @@ function submitTodoEdit(e) {
 }
 
 function toggleCompletion(e) {
+  const project = e.target.closest('.todo-item-container').classList[1];
   const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
 
-  const active = returnActiveProjects();
-  let index; 
+  let index
 
-  for (let i = 0; i < projectObj[active]['todo'].length; i++) {
-    if (projectObj[active]['todo'][i]['name'] === target) {
+  for (let i = 0; i < projectObj[project]['todo'].length; i++) {
+    if (projectObj[project]['todo'][i]['name'] === target) {
       index = i;
     }
   }
 
-  if (projectObj[active]['todo'][index]['complete']) {
-    projectObj[active]['todo'][index]['complete'] = false;
+  if (projectObj[project]['todo'][index]['complete']) {
+    projectObj[project]['todo'][index]['complete'] = false;
   } else {
-    projectObj[active]['todo'][index]['complete'] = true;
+    projectObj[project]['todo'][index]['complete'] = true;
   }
 
   saveToStorage();

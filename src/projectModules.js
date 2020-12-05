@@ -1,6 +1,5 @@
-import { render } from './render';
-import { clearActiveProject, saveToStorage, createProject, createTodo } from './helpers';
-
+import { render, renderSidebar } from './render';
+import { createProject, createTodo } from './helpers';
 
 const newProject = (function() {
   const _modal = document.getElementById('project-modal');
@@ -29,10 +28,8 @@ const newProject = (function() {
     if (name.length === 0) {
       alert('Please enter a valid name!');
     } else {
-      clearActiveProject()
       createProject(name);
       hide();
-      saveToStorage();
       render();
     }
   }
@@ -69,10 +66,9 @@ const newTodo = (function() {
     if (name.length === 0) {
       alert('Please enter a valid name!');
     } else {
-      createTodo(name, date)
+      createTodo(name, date);
       hide();
-      saveToStorage();
-      render();
+      renderSidebar();
     }
   }
 

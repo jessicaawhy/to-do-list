@@ -1,49 +1,53 @@
 import { projectObj } from './index';
-import { render } from './render';
+import { render, renderMain, renderSidebar } from './render';
+
+function saveToStorage() {
+  localStorage.setItem('projects', JSON.stringify(projectObj));
+}
 
 function createProject(name) {
+  clearActiveProjects();
+
   projectObj[name] = {
     todo: [],
     active: true,
   }
+  
+  saveToStorage();
 }
 
 function deleteProject(e) {
   const target = e.target.parentElement.firstChild.innerHTML;
   delete projectObj[target];
 
-  const isActive = returnActiveProject();
-  if (Object.keys(projectObj).length > 0 && (!isActive)) {
-    setActiveProject();
+  const isActive = returnActiveProjects(); 
+  if (Object.keys(projectObj).length > 0 && (isActive.length === 0)) {
+    setDefaultProject();
   }
 
   saveToStorage();
   render();
 }
 
-function returnActiveProject() {
-  for (let key in projectObj) {
-    if (projectObj[key]['active']) {
-      return key;
-    }
-  }
-}
-
-function clearActiveProject() {
+function clearActiveProjects() {
   for (let key in projectObj) {
     projectObj[key]['active'] = false;
   }
+
+  saveToStorage();
 }
 
-function setActiveProject() {
+function setDefaultProject() {
+  clearActiveProjects();
+
   let target = Object.keys(projectObj)[0];
   projectObj[target]['active'] = true;
 
   saveToStorage();
 }
 
-function switchProject(e) {
-  clearActiveProject();
+function setActiveProject(e) {
+  clearActiveProjects();
 
   const target = e.target.parentElement.firstChild.innerHTML;
   projectObj[target]['active'] = true;
@@ -52,21 +56,59 @@ function switchProject(e) {
   render();
 }
 
+function returnAllProjects() {
+  let projects = [];
+  for (let key in projectObj) {
+    if (!projects.includes(key)) {
+      projects.push(key);
+    }
+  }
+  return projects;
+}
+
+function returnActiveProjects() {
+  let projects = [];
+  for (let key in projectObj) {
+    if (projectObj[key]['active'] === true) {
+      projects.push(key);
+    }
+  }
+  return projects;
+}
+
+function returnActiveTodos() {
+  let activeProjects = returnActiveProjects();
+
+  let todos = [];
+
+  for (let i = 0; i < activeProjects.length; i++) {
+    let currentProject = activeProjects[i];
+    todos = todos.concat(projectObj[currentProject]['todo']);
+  }
+
+  return todos;
+}
+
 function createTodo(name, date) {
-  let current = returnActiveProject();
+  let current = returnActiveProjects()[0];
 
   projectObj[current]['todo'].push({
     name: name,
     dueDate: date,
-    complete: false
+    complete: false,
+    project: current,
   });
+
+  saveToStorage();
+  renderMain();
 }
 
 function deleteTodo(e) {
   const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
 
-  const active = returnActiveProject();
+  const active = returnActiveProjects();
   let index; 
+  // need to find a better way to do this
 
   for (let i = 0; i < projectObj[active]['todo'].length; i++) {
     if (projectObj[active]['todo'][i]['name'] === target) {
@@ -77,7 +119,7 @@ function deleteTodo(e) {
   projectObj[active]['todo'].splice(index, 1);
 
   saveToStorage();
-  render();
+  renderMain();
 }
 
 function hideTodoInputs() {
@@ -94,13 +136,13 @@ function toggleEditView(e) {
   const target = e.target.closest('.normal-view');
   target.style.display = 'none';
 
-  const input = e.target.closest('.todo-item-container').querySelector('.edit-view')
+  const input = e.target.closest('.todo-item-container').querySelector('.edit-view');
   input.style.display = 'flex';
 }
 
 function submitTodoEdit(e) {
   let oldTodo = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
-  let currentProj = returnActiveProject();
+  let currentProj = returnActiveProjects();
 
   let index; 
 
@@ -118,19 +160,16 @@ function submitTodoEdit(e) {
   } else {
     projectObj[currentProj]['todo'][index]['name'] = newTodo;
     projectObj[currentProj]['todo'][index]['dueDate'] = newDate;
+    
     saveToStorage();
-    render();
+    renderMain();
   }
-}
-
-function saveToStorage() {
-  localStorage.setItem('projects1', JSON.stringify(projectObj));
 }
 
 function toggleCompletion(e) {
   const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
 
-  const active = returnActiveProject();
+  const active = returnActiveProjects();
   let index; 
 
   for (let i = 0; i < projectObj[active]['todo'].length; i++) {
@@ -146,22 +185,21 @@ function toggleCompletion(e) {
   }
 
   saveToStorage();
-  render();
+  renderMain();
 }
 
 export { 
-  returnActiveProject, 
-  clearActiveProject, 
-  setActiveProject, 
-  switchProject, 
-  deleteProject, 
-  deleteTodo,
-  toggleEditView,
-  hideTodoInputs,
-  submitTodoEdit,
-  saveToStorage,
+  returnActiveProjects, 
+  returnAllProjects, 
+  returnActiveTodos,
   createProject,
   createTodo,
+  deleteProject,
+  setActiveProject,
+  deleteTodo,
+  toggleEditView,
+  submitTodoEdit,
+  hideTodoInputs,
   toggleCompletion
 };
         

@@ -1,5 +1,13 @@
 import { newProject, newTodo } from './projectModules';
-import { switchProject, deleteProject, deleteTodo, toggleEditView, hideTodoInputs, submitTodoEdit, toggleCompletion } from './helpers';
+import { 
+  deleteProject, 
+  setActiveProject, 
+  deleteTodo, 
+  toggleEditView,
+  submitTodoEdit,
+  hideTodoInputs,
+  toggleCompletion 
+} from './helpers';
 
 newProject.addBtn.addEventListener('click', newProject.show);
 newProject.cancelBtn.addEventListener('click', newProject.hide);
@@ -11,7 +19,7 @@ newTodo.submitBtn.addEventListener('click', newTodo.submit);
 
 function addProjectListeners() {
   const projects = document.querySelectorAll('.project');
-  projects.forEach(project => project.addEventListener('click', (e) => switchProject(e)));
+  projects.forEach(project => project.addEventListener('click', (e) => setActiveProject(e)));
 
   const deleteBtns = document.querySelectorAll('.delete-project');
   deleteBtns.forEach(btn => btn.addEventListener('click', (e) => deleteProject(e)));
@@ -29,11 +37,9 @@ function addTodoListeners() {
 
   const cancelBtns = document.querySelectorAll('.todo-cancel-btn');
   cancelBtns.forEach(btn => btn.addEventListener('click', hideTodoInputs));
-}
 
-function addCheckboxListeners() {
   const checkboxes = document.querySelectorAll('.todo-checkbox');
-  checkboxes.forEach(box => box.addEventListener('change',(e) => toggleCompletion(e)))
+  checkboxes.forEach(box => box.addEventListener('change',(e) => toggleCompletion(e)));
 }
 
-export { addProjectListeners, addTodoListeners, addCheckboxListeners };
+export { addProjectListeners, addTodoListeners };

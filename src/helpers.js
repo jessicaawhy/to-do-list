@@ -17,16 +17,23 @@ function createProject(name) {
 }
 
 function deleteProject(e) {
-  const target = e.target.parentElement.firstChild.innerHTML;
+  const target = e.target.parentElement.querySelector('li').innerHTML;
   delete projectObj[target];
 
+  const header = document.getElementById('main-project-header');
   const isActive = returnActiveProjects(); 
-  if (Object.keys(projectObj).length > 0 && (isActive.length === 0)) {
+
+  if (header.innerHTML === target) {
     setDefaultProject();
+    render();
+  } else if (isActive.includes(header.innerHTML)) {
+    renderSidebar();
+  } else {
+    renderSidebar();
+    renderMain();
   }
 
   saveToStorage();
-  render();
 }
 
 function setAllProjectsActive() {
@@ -49,7 +56,9 @@ function setDefaultProject() {
   clearActiveProjects();
 
   let target = Object.keys(projectObj)[0];
-  projectObj[target]['active'] = true;
+  if (target) {
+    projectObj[target]['active'] = true;
+  }
 
   saveToStorage();
 }
@@ -57,7 +66,7 @@ function setDefaultProject() {
 function setActiveProject(e) {
   clearActiveProjects();
 
-  const target = e.target.parentElement.firstChild.innerHTML;
+  const target = e.target.parentElement.querySelector('li').innerHTML;
   projectObj[target]['active'] = true;
 
   saveToStorage();
@@ -65,13 +74,7 @@ function setActiveProject(e) {
 }
 
 function returnAllProjects() {
-  let projects = [];
-  for (let key in projectObj) {
-    if (!projects.includes(key)) {
-      projects.push(key);
-    }
-  }
-  return projects;
+  return Object.keys(projectObj);
 }
 
 function returnActiveProjects() {
@@ -86,7 +89,6 @@ function returnActiveProjects() {
 
 function returnActiveTodos() {
   let activeProjects = returnActiveProjects();
-
   let todos = [];
 
   for (let i = 0; i < activeProjects.length; i++) {
@@ -98,7 +100,9 @@ function returnActiveTodos() {
 }
 
 function createTodo(name, date) {
-  let current = returnActiveProjects()[0];
+  // only allows todo creation in project view, 
+  // add todo button not displayed in all view
+  let current = returnActiveProjects()[0]; 
 
   projectObj[current]['todo'].push({
     name: name,
@@ -116,13 +120,11 @@ function deleteTodo(e) {
   const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
 
   let index
-
   for (let i = 0; i < projectObj[project]['todo'].length; i++) {
     if (projectObj[project]['todo'][i]['name'] === target) {
       index = i;
     }
   }
-
   projectObj[project]['todo'].splice(index, 1);
 
   saveToStorage();
@@ -152,7 +154,6 @@ function submitTodoEdit(e) {
   const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
 
   let index
-
   for (let i = 0; i < projectObj[project]['todo'].length; i++) {
     if (projectObj[project]['todo'][i]['name'] === target) {
       index = i;
@@ -178,7 +179,6 @@ function toggleCompletion(e) {
   const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
 
   let index
-
   for (let i = 0; i < projectObj[project]['todo'].length; i++) {
     if (projectObj[project]['todo'][i]['name'] === target) {
       index = i;

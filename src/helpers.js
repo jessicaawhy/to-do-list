@@ -37,10 +37,16 @@ function deleteProject(e) {
 
 function editProjectName(name) {
   const target = document.getElementById('main-project-header').innerHTML;
+  let temp = Object.assign({}, projectObj);
 
-  // todo: refactor. this changes the order on the sidebar list
-  projectObj[name] = projectObj[target];
-  delete projectObj[target];
+  for (let key in projectObj) {
+    delete projectObj[key];
+    if (key === target) {
+      projectObj[name] = temp[key];
+    } else {
+      projectObj[key] = temp[key];
+    }
+  }
 
   for (let i = 0; i < projectObj[name]['todo'].length; i++) {
     projectObj[name]['todo'][i]['project'] = name;

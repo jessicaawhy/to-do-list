@@ -88,6 +88,8 @@ function renderSidebar() {
 
 function renderMain() {
   deleteMain();
+
+  let header = document.getElementById('main-project-header').innerHTML;
   let todos = returnActiveTodos();
   
   for (let i = 0; i < todos.length; i++) {
@@ -153,6 +155,18 @@ function renderMain() {
       classList: ['todo-date'],
       parentElement: endContainer,
     })
+
+    if (header !== todos[i]['project']) {
+      let projectParent = create({
+        type: 'span', 
+        innerHTML: `${todos[i]['project']}`,
+        attributes: {
+          id: '',
+        },
+        classList: ['project-parent'],
+        parentElement: endContainer,
+      })
+    }
 
     let editButton = create({
       type: 'img', 

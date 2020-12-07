@@ -183,7 +183,7 @@ function toggleEditView(e) {
 function submitTodoEdit(e) {
   const project = e.target.closest('.todo-item-container').classList[1];
   const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
-  console.log(projectObj);
+
   let index;
   for (let i = 0; i < projectObj[project]['todo'].length; i++) {
     if (projectObj[project]['todo'][i]['name'] === target) {

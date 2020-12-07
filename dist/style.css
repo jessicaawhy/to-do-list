@@ -124,6 +124,18 @@ li {
   padding-right: 15px;
 }
 
+.complete > li,
+.complete > div >.todo-date {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.project-parent {
+  border-radius: 3px;
+  padding: 3px;
+  background-color: rgb(215, 220, 223);
+}
+
 .todo-delete-btn {
   font-size: 25px;
 }
@@ -177,7 +189,7 @@ li {
 /* Modal Content/Box */
 
 .modal-content {
-  max-width: 250px; /* Could be more or less, depending on screen size */
+  max-width: 300px; /* Could be more or less, depending on screen size */
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
@@ -203,10 +215,4 @@ input {
 
 .button-container > button {
   padding: 1px 6px;
-}
-
-.complete > li,
-.complete > div >.todo-date {
-  text-decoration: line-through;
-  color: gray;
 }

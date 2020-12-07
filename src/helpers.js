@@ -1,5 +1,5 @@
 import { projectObj } from './index';
-import { render, renderMain, renderSidebar } from './render';
+import { render } from './render';
 
 function saveToStorage() {
   localStorage.setItem('projects', JSON.stringify(projectObj));
@@ -27,16 +27,19 @@ function deleteProject(e) {
     setDefaultProject();
     render();
   } else if (isActive.includes(header.innerHTML)) {
-    renderSidebar();
+    render();
   } else {
-    renderSidebar();
-    renderMain();
+    render();
   }
 
   saveToStorage();
 }
 
 function setAllProjectsActive() {
+  let list = document.getElementById('project-list');
+  list.classList.remove(...list.classList);
+  list.classList.add('all-view');
+
   for (let key in projectObj) {
     projectObj[key]['active'] = true;
   }
@@ -53,6 +56,10 @@ function clearActiveProjects() {
 }
 
 function setDefaultProject() {
+  let list = document.getElementById('project-list');
+  list.classList.remove(...list.classList);
+  list.classList.add('project-view');
+
   clearActiveProjects();
 
   let target = Object.keys(projectObj)[0];
@@ -64,6 +71,9 @@ function setDefaultProject() {
 }
 
 function setActiveProject(e) {
+  let list = document.getElementById('project-list');
+  list.classList.remove(...list.classList);
+  list.classList.add('project-view');
   clearActiveProjects();
 
   const target = e.target.parentElement.querySelector('li').innerHTML;
@@ -112,7 +122,7 @@ function createTodo(name, date) {
   });
 
   saveToStorage();
-  renderMain();
+  render();
 }
 
 function deleteTodo(e) {
@@ -128,7 +138,7 @@ function deleteTodo(e) {
   projectObj[project]['todo'].splice(index, 1);
 
   saveToStorage();
-  renderMain();
+  render();
 }
 
 function hideTodoInputs() {
@@ -170,7 +180,7 @@ function submitTodoEdit(e) {
     projectObj[project]['todo'][index]['dueDate'] = newDate;
     
     saveToStorage();
-    renderMain();
+    render();
   }
 }
 
@@ -192,7 +202,7 @@ function toggleCompletion(e) {
   }
 
   saveToStorage();
-  renderMain();
+  render();
 }
 
 function showAllTodos() {
@@ -208,6 +218,7 @@ export {
   createTodo,
   deleteProject,
   setActiveProject,
+  setDefaultProject,
   deleteTodo,
   toggleEditView,
   submitTodoEdit,

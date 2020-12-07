@@ -1,19 +1,22 @@
 import { create } from './create';
-import { returnActiveProjects, returnAllProjects, returnActiveTodos } from './helpers';
+import { returnActiveProjects, returnAllProjects, returnActiveTodos, setDefaultProject } from './helpers';
 import { addProjectListeners, addTodoListeners } from './listeners';
 
 function updateHeader() {
+  let list = document.getElementById('project-list');
+  if (!list.classList[0]) setDefaultProject();
+
   let header = document.getElementById('main-project-header');
   let todoButton = document.getElementById('add-todo-button');
 
-  let projects = returnActiveProjects();
+  let projects = returnActiveProjects()
 
-  if (projects.length === 0) {
-    header.innerHTML = 'Add new project!';
-    todoButton.style.display = 'none';
-  } else if (projects.length === 1) {
+  if (list.classList[0] === 'project-view' && projects.length > 0) {
     header.innerHTML = `${projects[0]}`;
     todoButton.style.display = 'flex';
+  } else if (list.classList[0] === 'project-view' && projects.length === 0) {
+    header.innerHTML = 'Add new project!';
+    todoButton.style.display = 'none';
   } else {
     header.innerHTML = 'All tasks';
     todoButton.style.display = 'none';
@@ -21,9 +24,9 @@ function updateHeader() {
 }
 
 function render() {
+  updateHeader();
   renderSidebar();
   renderMain();
-  updateHeader();
 }
 
 function deleteSidebar() {
@@ -247,4 +250,4 @@ function renderMain() {
   addTodoListeners();
 }
 
-export { render, renderMain, renderSidebar };
+export { render };

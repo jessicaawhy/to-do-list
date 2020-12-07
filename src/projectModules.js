@@ -1,4 +1,4 @@
-import { render, renderSidebar } from './render';
+import { render } from './render';
 import { createProject, createTodo } from './helpers';
 
 const newProject = (function() {
@@ -68,7 +68,7 @@ const newTodo = (function() {
     } else {
       createTodo(name, date);
       hide();
-      renderSidebar();
+      render();
     }
   }
 

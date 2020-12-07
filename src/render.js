@@ -8,18 +8,22 @@ function updateHeader() {
 
   let header = document.getElementById('main-project-header');
   let todoButton = document.getElementById('add-todo-button');
+  let editBtn = document.getElementById('edit-project-btn');
 
   let projects = returnActiveProjects()
 
   if (list.classList[0] === 'project-view' && projects.length > 0) {
     header.innerHTML = `${projects[0]}`;
     todoButton.style.display = 'flex';
+    editBtn.style.display = 'block';
   } else if (list.classList[0] === 'project-view' && projects.length === 0) {
     header.innerHTML = 'Add new project!';
     todoButton.style.display = 'none';
+    editBtn.style.display = 'block';
   } else {
     header.innerHTML = 'All tasks';
     todoButton.style.display = 'none';
+    editBtn.style.display = 'none';
   }
 }
 

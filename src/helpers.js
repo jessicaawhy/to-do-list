@@ -35,6 +35,21 @@ function deleteProject(e) {
   saveToStorage();
 }
 
+function editProjectName(name) {
+  const target = document.getElementById('main-project-header').innerHTML;
+
+  // todo: refactor. this changes the order on the sidebar list
+  projectObj[name] = projectObj[target];
+  delete projectObj[target];
+
+  for (let i = 0; i < projectObj[name]['todo'].length; i++) {
+    projectObj[name]['todo'][i]['project'] = name;
+  }
+  
+  saveToStorage();
+  render();
+}
+
 function setAllProjectsActive() {
   let list = document.getElementById('project-list');
   list.classList.remove(...list.classList);
@@ -162,8 +177,8 @@ function toggleEditView(e) {
 function submitTodoEdit(e) {
   const project = e.target.closest('.todo-item-container').classList[1];
   const target = e.target.closest('.todo-item-container').querySelector('li').innerHTML;
-
-  let index
+  console.log(projectObj);
+  let index;
   for (let i = 0; i < projectObj[project]['todo'].length; i++) {
     if (projectObj[project]['todo'][i]['name'] === target) {
       index = i;
@@ -224,6 +239,7 @@ export {
   submitTodoEdit,
   hideTodoInputs,
   toggleCompletion,
-  showAllTodos
+  showAllTodos,
+  editProjectName
 };
         

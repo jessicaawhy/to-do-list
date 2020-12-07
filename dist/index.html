@@ -25,6 +25,7 @@
 
         <div id="main-header-area">
           <h2 id="main-project-header"></h2>
+          <img src="../src/public/edit-pencil.png" id="edit-project-btn">
         </div>
 
         <div id="main-container">
@@ -45,6 +46,24 @@
             </div>
             <div class="button-container">
               <button id="submit-project" type="submit">Submit</button>
+              <button class="cancel">Cancel</button>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+
+      <div id="edit-project-modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="form-container">
+            <div>
+              <label for="edit-project-name">Project Name</label>
+              <input id="edit-project-name" type="text" required>
+            </div>
+            <div class="button-container">
+              <button id="edit-project" type="submit">Submit</button>
               <button class="cancel">Cancel</button>
             </div>
           </div>

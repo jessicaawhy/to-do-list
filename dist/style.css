@@ -90,6 +90,12 @@ li {
   font-size: var(--header-font);
 }
 
+#edit-project-btn {
+  padding-left: 20px;
+  padding-bottom: 7px;
+  height: 20px;
+}
+
 #main-container {
   grid-area: 2 / 1 / 3 / 2;
 }

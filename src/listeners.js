@@ -1,4 +1,4 @@
-import { newProject, newTodo } from './projectModules';
+import { newProject, newTodo, editProject } from './projectModules';
 import { 
   deleteProject, 
   setActiveProject, 
@@ -13,6 +13,10 @@ import {
 newProject.addBtn.addEventListener('click', newProject.show);
 newProject.cancelBtn.addEventListener('click', newProject.hide);
 newProject.submitBtn.addEventListener('click', newProject.submit);
+
+editProject.editBtn.addEventListener('click', editProject.show);
+editProject.cancelBtn.addEventListener('click', editProject.hide);
+editProject.submitBtn.addEventListener('click', editProject.submit);
 
 newTodo.addBtn.addEventListener('click', newTodo.show);
 newTodo.cancelBtn.addEventListener('click', newTodo.hide);

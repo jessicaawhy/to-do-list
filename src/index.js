@@ -1,3 +1,4 @@
+import './styles/style.css';
 import { render } from './render';
 
 if (!localStorage.getItem('projects')) {

@@ -173,7 +173,7 @@ function renderMain() {
       innerHTML: '',
       attributes: {
         id: '',
-        src: '../src/public/edit-pencil.png'
+        src: './src/public/edit-pencil.png'
       },
       classList: ['todo-edit-btn'],
       parentElement: endContainer,

@@ -1,6 +1,8 @@
 import { create } from './create';
 import { returnActiveProjects, returnAllProjects, returnActiveTodos, setDefaultProject } from './helpers';
 import { addProjectListeners, addTodoListeners } from './listeners';
+import pencilImg from './public/edit-pencil.png';
+import homeImg from './public/home.png';
 
 function updateHeader() {
   let list = document.getElementById('project-list');
@@ -173,7 +175,7 @@ function renderMain() {
       innerHTML: '',
       attributes: {
         id: '',
-        src: './src/public/edit-pencil.png'
+        src: pencilImg,
       },
       classList: ['todo-edit-btn'],
       parentElement: endContainer,
@@ -264,6 +266,12 @@ function renderMain() {
       parentElement: editEndContainer,
     })
   }
+
+  const home = document.getElementById('home');
+  home.setAttribute('src', homeImg);
+
+  const editProjectBtn = document.getElementById('edit-project-btn');
+  editProjectBtn.setAttribute('src', pencilImg);
 
   addTodoListeners();
 }
